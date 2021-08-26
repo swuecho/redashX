@@ -1,5 +1,11 @@
 .App {
   text-align: center;
+  margin: auto;
+  max-width: 60rem;
+}
+
+.cb_plot {
+  margin: 40px 40px;
 }
 
 .App-logo {
