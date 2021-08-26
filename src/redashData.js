@@ -41,3 +41,5 @@ export function useRedashQueryData(queryId) {
 
   return useMemo(() => data, [data]);
 }
+
+// TODO; get query id from query 

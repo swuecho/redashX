@@ -1,43 +1,19 @@
-import React, { useState } from "react";
-import { Renderer, Editor } from "@redash/viz";
+import React from "react";
+import { Renderer } from "@redash/viz";
+import { useRedashQueryData} from "./redashData";
 
-//import  cb_less   from "src/cb_less_100_ratio_2021_08_22.json"
-// console.log(cb_less.query_result.data.rows)
-
-const exampleData = {
-        columns: [
-                { type: null, name: "Country" },
-                { type: null, name: "Amount" },
-        ],
-        rows: [
-                { Amount: 37.620000000000005, Country: "Argentina" },
-                { Amount: 37.620000000000005, Country: "Australia" },
-                { Amount: 42.62, Country: "Austria" },
-                { Amount: 37.62, Country: "Belgium" },
-                { Amount: 190.09999999999997, Country: "Brazil" },
-                { Amount: 303.9599999999999, Country: "Canada" },
-                { Amount: 46.62, Country: "Chile" },
-                { Amount: 90.24000000000001, Country: "Czech Republic" },
-                { Amount: 37.620000000000005, Country: "Denmark" },
-                { Amount: 41.620000000000005, Country: "Finland" },
-                { Amount: 195.09999999999994, Country: "France" },
-        ],
-};
+// query, id.
+// plot configuration
 
 function RedashExample() {
-        const [options, setOptions] = useState({ countRows: true });
+        const proData = useRedashQueryData(53);
+        let pro_data = { "id": 53, "type": "CHART", "name": "cb_median_and_average", "description": "", "options": { "globalSeriesType": "column", "sortX": true, "legend": { "enabled": true, "placement": "auto", "traceorder": "normal" }, "xAxis": { "type": "datetime", "labels": { "enabled": true } }, "yAxis": [{ "type": "linear" }, { "type": "linear", "opposite": true }], "alignYAxesAtZero": false, "error_y": { "type": "data", "visible": true }, "series": { "stacking": null, "error_y": { "type": "data", "visible": true } }, "seriesOptions": { "average": { "zIndex": 1, "index": 0, "type": "line", "name": "\u5e73\u5747\u6570", "yAxis": 0, "color": "#8CFFB4" }, "median": { "zIndex": 0, "index": 0, "type": "line", "name": "\u4e2d\u4f4d\u6570", "yAxis": 0 } }, "valuesOptions": {}, "columnMapping": { "average": "y", "median": "y", "trade_date": "x" }, "direction": { "type": "counterclockwise" }, "sizemode": "diameter", "coefficient": 1, "numberFormat": "0,0[.]00000", "percentFormat": "0[.]00%", "textFormat": "", "missingValuesAsZero": true, "showDataLabels": false, "dateTimeFormat": "DD/MM/YY HH:mm", "customCode": "// Available variables are x, ys, element, and Plotly\n// Type console.log(x, ys); for more info about x and ys\n// To plot your graph call Plotly.plot(element, ...)\n// Plotly examples and docs: https://plot.ly/javascript/" }, "updated_at": "2021-07-31T03:41:40.271Z", "created_at": "2021-06-24T07:22:30.170Z" }
 
         return (
                 <div>
-    <Editor
-            type="COUNTER"
-            visualizationName="Example Visualization"
-            options={options}
-            data={exampleData}
-            onChange={setOptions}
-    />
-                        <Renderer type="COUNTER" visualizationName="Example Visualization" options={options} data={exampleData} />
+                        <Renderer type="CHART" visualizationName={pro_data.name} options={pro_data.options} data={proData} />
                 </div>
+
         );
 }
 

@@ -3,7 +3,7 @@ import { get } from "lodash";
 import { Editor, Renderer, registeredVisualizations } from "@redash/viz";
 import { Form, Select, Button } from "antd";
 import VisualizationTypeSelect from "./components/VisualizationTypeSelect";
-import { useRedashQueryData, useRedashQueries } from "./redashPreview";
+import { useRedashQueryData, useRedashQueries } from "./redashData";
 
 export default function App() {
   const [type, setType] = useState("TABLE");
@@ -31,15 +31,7 @@ export default function App() {
         <Form.Item
           label={
             <>
-              Query (from{" "}
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://redash-preview.netlify.app"
-              >
-                Redash Preview
-              </a>
-              )
+              Query               )
             </>
           }
         >
