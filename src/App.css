@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+
+.visualization-example {
+  margin: -10px;
+}
+
+.visualization-example > div {
+  padding: 10px;
+  width: 100%;
+  overflow: auto;
+}
+
+@media (min-width: 768px) {
+  .visualization-example {
+    display: flex;
+  }
+}
