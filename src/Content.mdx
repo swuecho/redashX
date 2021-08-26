@@ -1,4 +1,33 @@
 import BarPlot from './PlotlyDemo.js'
+import { useRedashQueryData } from "./redashData";
+import ReactJson from 'react-json-view'
+import { useEffect, useState, useMemo } from "react";
+
+
+export function getValueInFirstRow(data, name) {
+    return data; // ['rows'][0][name]
+}
+
+export function RedashTable() {
+        // render after useEffect function run?
+        const proData = useRedashQueryData(65);
+        const [median, setMedian] = useState(0);
+        const [average, setAverage] = useState(0);
+        useEffect(() => {
+            setMedian(getValueInFirstRow(proData, 'median'))
+        }, [proData]);
+        useEffect(() => {
+            setAverage(getValueInFirstRow(proData, 'average'))
+        }, [proData]);
+        return (
+         <div> 
+          <ReactJson src={proData}></ReactJson>
+         <p>
+         中位数 { median } 平均值 { average }
+         </p>
+          </div>
+        )
+}
 
 export const Box = () => (
   <div style={{padding: 20, backgroundColor: 'tomato'}} />
@@ -8,7 +37,6 @@ export const Box = () => (
 
 This is **markdown** with <span style={{color: "red"}}>JSX</span>: MDX!
 
+<RedashTable/>
 <BarPlot/>
-
-
 <Box />
