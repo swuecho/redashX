@@ -1,6 +1,5 @@
 import './App.css';
 import RedashPlot from './PlotRedashData.js'
-import RedashTable from './RedashTable.js'
 import Redash from './Redash.js'
 import "antd/dist/antd.css";
 
