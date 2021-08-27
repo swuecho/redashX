@@ -1,29 +1,19 @@
 # Redash MDX
 
-use Redash Api and Redash/Vis to generate MDX report.
+use Redash Api and Redash/Vis to generate report using MDX.
+
+custom dashboard with all the redash visualization + MDX.
+
+## fetch data
+
+1. write your query in Redash, write down the query id.
+2. use the query id to fetch data. `useRedashData(query_id)`
+3. use the data in your custom React Components.
 
 
+## plot data
 
-### Code Splitting
+1. create plot in Redash, write down the query id and plot id.
+2. use the plot in your MDX. `useRedashPlot(query_id, plot_id)`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
