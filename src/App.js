@@ -1,6 +1,5 @@
 import './App.css';
 import RedashPlot from './PlotRedashData.js'
-import Redash from './Redash.js'
 import "antd/dist/antd.css";
 
 
@@ -12,7 +11,6 @@ function App() {
     <div className="App">
       <Content></Content>
       <RedashPlot/>
-      <Redash/>
     </div>
   );
 }
