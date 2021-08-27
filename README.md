@@ -1,8 +1,7 @@
 # Redash MDX
 
-use Redash Api and Redash/Vis to generate report using MDX.
+use Redash API and Redash/Vis to generate report with MDX.
 
-custom dashboard with all the redash visualization + MDX.
 
 ## fetch data
 
