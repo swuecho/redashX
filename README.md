@@ -15,4 +15,4 @@ use Redash API and Redash/Vis to generate report with MDX.
 1. create plot in Redash, write down the query id and plot id.
 2. use the plot in your MDX. `useRedashPlot(query_id, plot_id)`
 
-
+related: https://www.evidence.dev/
