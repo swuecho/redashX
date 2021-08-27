@@ -17,6 +17,7 @@ export default function App() {
     // reset options when type or data changes
     setOptions({});
   }, [type, data]);
+ 
 
   useEffect(() => {
     if (data) {

@@ -3,11 +3,12 @@ import { useEffect, useState } from "react";
 import moment from "moment";
 import 'moment/locale/zh-cn'  // without this line it didn't work
 
-
+// turn this into a component (Value), mimic Evidence.
 export function getValueInFirstRow(data, name) {
         if (data) { return Math.round(data['rows'][0][name] * 100) / 100 }
 }
 
+// turn this in to a filter
 export function formatTradeDate(date) {
         moment.locale('zh-cn')
         return moment(date, 'YYYYMMDD').format('ll');
