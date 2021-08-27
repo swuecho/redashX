@@ -1,5 +1,5 @@
 import React from "react";
-import { useRedashQueryData } from "./redashData";
+import { useRedashQueryData } from "../redash/redashData";
 import ReactJson from 'react-json-view'
 
 // query, id.

@@ -1,4 +1,4 @@
-import { useRedashQueryData } from "../../redashData";
+import { useRedashQueryData } from "../redash/redashData";
 import { useEffect, useState } from "react";
 import moment from "moment";
 import 'moment/locale/zh-cn'  // without this line it didn't work

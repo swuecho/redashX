@@ -1,5 +1,5 @@
 import React from "react";
-import { useRedashQueryData } from "../../redashData";
+import { useRedashQueryData } from "../redash/redashData.js";
 
 import { Renderer, updateVisualizationsSettings } from "@redash/viz";
 
