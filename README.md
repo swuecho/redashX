@@ -8,7 +8,7 @@ custom dashboard with all the redash visualization + MDX.
 
 1. write your query in Redash, write down the query id.
 2. use the query id to fetch data. `useRedashData(query_id)`
-3. use the data in your custom React Components.
+3. use the data in your custom React Component.
 
 
 ## plot data
