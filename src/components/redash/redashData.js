@@ -1,5 +1,5 @@
 import { useEffect, useState, useMemo } from "react";
-import { get } from "lodash";
+import { get, find } from "lodash";
 import axios from "axios";
 
 const REDASH_BASE_URL = "";
@@ -38,6 +38,22 @@ export function useRedashQueryData(queryId) {
         .then(({ data }) => setData(get(data, "query_result.data")));
     }
   }, [queryId]);
+
+  return useMemo(() => data, [data]);
+}
+
+
+export function useRedashPlot(queryId, plotId) {
+  const [data, setData] = useState();
+  useEffect(() => {
+    if (plotId && queryId) {
+      // curl 'http://192.168.0.135/api/visualizations/41' \
+ 
+      axios
+        .get(`${REDASH_BASE_URL}/api/queries/${queryId}`, axiosOptions)
+        .then(({ data }) => setData(find(get(data, `visualizations`), {id: plotId})));
+    }
+  }, [queryId,plotId]);
 
   return useMemo(() => data, [data]);
 }

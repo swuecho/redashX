@@ -2,7 +2,9 @@ import CbSummary from './components/cb/summary.js'
 import { useRedashQueryData } from "./components/redash/redashData.js";
 import ReactJson from 'react-json-view'
 import CbLessPlot from './components/cb/cbLessPlot';
-import RedashPlot from './components/cb/PlotRedashData.js';
+import RedashPlotRaw from './components/cb/PlotRedashData.js';
+import RedashPlot from "./components/redash/redashPlot";
+
 
 
 export const Box = () => (
@@ -13,9 +15,8 @@ export const Box = () => (
 
 <CbSummary/>
 
-<RedashPlot/>
+<RedashPlot queryId={53} plotId={76}></RedashPlot>
 
-<CbLessPlot></CbLessPlot>
-
+<RedashPlot queryId={31} plotId={46}></RedashPlot>
 
 <hr/>
