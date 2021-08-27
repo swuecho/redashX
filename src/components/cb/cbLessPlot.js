@@ -1,20 +1,6 @@
 import React from "react";
 import { useRedashQueryData } from "../redash/redashData.js";
-
-import { Renderer, updateVisualizationsSettings } from "@redash/viz";
-
-
-function wrapComponentWithSettings(WrappedComponent) {
-  return function VisualizationComponent(props) {
-    updateVisualizationsSettings({
-      hidePlotlyModeBar: true,
-    });
-
-    return <WrappedComponent {...props} />;
-  };
-}
-
-export const ConfiguredRenderer = wrapComponentWithSettings(Renderer);
+import  RedashRenderer  from "../redash/Renderer";
 
 // query, id.
 // plot configuration
@@ -25,7 +11,7 @@ function CbLessPlot() {
 
   return (
     <div class="cb_plot">
-      <ConfiguredRenderer type="CHART" visualizationName={pro_data.name} options={pro_data.options} data={proData} />
+      <RedashRenderer type="CHART" visualizationName={pro_data.name} options={pro_data.options} data={proData} />
     </div>
 
   );
