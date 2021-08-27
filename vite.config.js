@@ -4,6 +4,7 @@ import reactRefresh from "@vitejs/plugin-react-refresh";
 
 import mdx from 'vite-plugin-mdx'
 
+
 // `options` are passed to `@mdx-js/mdx`
 const mdx_options = {
   // See https://mdxjs.com/advanced/plugins
@@ -15,7 +16,20 @@ const mdx_options = {
 
 
 export default defineConfig({
-  plugins: [reactRefresh(), mdx(mdx_options)]
+  server: {
+    proxy: {
+      "/api": {
+        target: "http://192.168.0.135",
+        changeOrigin: true,
+        secure: false
+      }
+    }
+  },
+  esbuild: {
+    jsxInject: `import React from 'react'`
+  },
+  plugins: [reactRefresh(), mdx(mdx_options),
+  ]
 })
 
 

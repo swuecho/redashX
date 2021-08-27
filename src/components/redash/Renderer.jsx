@@ -1,4 +1,3 @@
-import React from "react";
 import { Renderer, updateVisualizationsSettings } from "@redash/viz";
 
 

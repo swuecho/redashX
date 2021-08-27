@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { filter, sortBy } from "lodash";
 import { Select } from "antd";
 import { registeredVisualizations } from "@redash/viz";

@@ -1,4 +1,3 @@
-import React from "react";
 import { useRedashQueryData } from "../redash/redashData";
 import  RedashRenderer  from "../redash/Renderer";
 
