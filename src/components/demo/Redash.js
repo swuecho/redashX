@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { get } from "lodash";
 import { Editor, Renderer, registeredVisualizations } from "@redash/viz";
 import { Form, Select, Button } from "antd";
-import VisualizationTypeSelect from "./components/VisualizationTypeSelect";
-import { useRedashQueryData, useRedashQueries } from "./redashData";
+import VisualizationTypeSelect from "./VisualizationTypeSelect";
+import { useRedashQueryData, useRedashQueries } from "../redash/redashData";
 
 export default function App() {
   const [type, setType] = useState("TABLE");
@@ -17,6 +17,7 @@ export default function App() {
     // reset options when type or data changes
     setOptions({});
   }, [type, data]);
+ 
 
   useEffect(() => {
     if (data) {
