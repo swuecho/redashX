@@ -1,5 +1,9 @@
 import React from 'react';
 import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
+import CbSummary from './components/cb/summary.js'
+
+
+
 
 // Create styles
 const styles = StyleSheet.create({
@@ -14,12 +18,13 @@ const styles = StyleSheet.create({
   }
 });
 
+// Multiple Lang suppport is required
 // Create Document Component
 const MyDocument = () => (
   <Document>
     <Page size="A4" style={styles.page}>
       <View style={styles.section}>
-        <Text>Section #1</Text>
+        <Text> <CbSummary></CbSummary> </Text>
       </View>
       <View style={styles.section}>
         <Text>Section #2</Text>
