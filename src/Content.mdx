@@ -1,9 +1,5 @@
-import CbSummary from './components/cb/summary.js'
-import { useRedashQueryData } from "./components/redash/redashData.js";
-import ReactJson from 'react-json-view'
-import CbLessPlot from './components/cb/cbLessPlot';
-import RedashPlot from './components/cb/PlotRedashData.js';
-
+import CbSummary from './components/cb/summary.jsx';
+import CbLessPlot from './components/cb/cbLessPlot.jsx';
 
 export const Box = () => (
   <div style={{padding: 20, backgroundColor: 'tomato'}} />
@@ -12,10 +8,6 @@ export const Box = () => (
 # 可转债观察
 
 <CbSummary/>
-
-<RedashPlot/>
-
-<CbLessPlot></CbLessPlot>
-
+<CbLessPlot/>
 
 <hr/>

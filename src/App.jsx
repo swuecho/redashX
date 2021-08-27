@@ -3,7 +3,7 @@ import "antd/dist/antd.css";
 
 
 /* eslint-disable import/no-webpack-loader-syntax */
-import Content from '!babel-loader!@mdx-js/loader!./Content.mdx'
+import Content from './Content.mdx'
 
 
 function App() {

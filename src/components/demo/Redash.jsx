@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { get } from "lodash";
 import { Editor, Renderer, registeredVisualizations } from "@redash/viz";
 import { Form, Select, Button } from "antd";
