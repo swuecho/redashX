@@ -8,7 +8,7 @@ import RedashPlot from "../redash/redashPlot";
 function CbLessPlot() {
 
   return (
-    <div className="cb_plot">
+    <div className="redash_plot">
       <RedashPlot queryId={31} plotId={46}></RedashPlot>
     </div>
 
