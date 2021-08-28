@@ -48,12 +48,12 @@ export function useRedashPlot(queryId, plotId) {
   useEffect(() => {
     if (plotId && queryId) {
       // curl 'http://192.168.0.135/api/visualizations/41' \
- 
+
       axios
         .get(`${REDASH_BASE_URL}/api/queries/${queryId}`, axiosOptions)
-        .then(({ data }) => setData(find(get(data, `visualizations`), {id: plotId})));
+        .then(({ data }) => setData(find(get(data, `visualizations`), { id: plotId })));
     }
-  }, [queryId,plotId]);
+  }, [queryId, plotId]);
 
   return useMemo(() => data, [data]);
 }
