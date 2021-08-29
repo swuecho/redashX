@@ -2,7 +2,7 @@ import { useEffect, useState, useMemo } from "react";
 import { get, find } from "lodash";
 import axios from "axios";
 
-const REDASH_BASE_URL = "";
+const REDASH_BASE_URL = "/react";
 const USER_API_KEY = "mmaDqcIgA7qjQlqYmQLsXCQugXxhaeeCK9agLg8b";
 
 const axiosOptions = {
