@@ -17,6 +17,7 @@ import "antd/dist/antd.css";
 import Content from '!babel-loader!@mdx-js/loader!./Content.mdx'
 import Content2 from '!babel-loader!@mdx-js/loader!./Content2.mdx'
 import MyProTable from "./components/demo/ProEditTable";
+
 import { Card, Col, Row } from 'antd';
 
 

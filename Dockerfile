@@ -11,17 +11,13 @@ WORKDIR /app
 COPY package.json ./ 
 COPY yarn.lock  ./ 
 
-## fable
-#RUN yarn --cwd third_party/fs_lib install
-#RUN yarn --cwd third_party/fs_lib build
-# RUN yarn --cwd third_party/fs_lib/bs_widget test
+
+# where the ENV is used?
+ENV SR_ADMIN_PRODUCTION true 
 
 RUN yarn install
 
 COPY . .
-# where the ENV is used?
-ENV SR_ADMIN_PRODUCTION true 
-
 
 # RUN yarn test:unit
 RUN yarn build
@@ -29,21 +25,13 @@ RUN yarn build
 # COPY static ./dist/static
 
 # production stage
-FROM nginx:1.15.8-alpine as production-stage
+FROM nginx:alpine as production-stage
 
-RUN mkdir -p /var/log/nginx
-RUN mkdir -p /var/www/html
+WORKDIR /usr/share/nginx/html
 
-COPY --from=build-stage /app/build /var/www/html
-
-# make all files belong to the nginx user
-#RUN chown -R nginx:nginx /var/www/html 
-RUN chmod -R 777 /var/www/html
-
-# Copy the respective nginx configuration files
-COPY nginx_config/nginx.conf /etc/nginx/nginx.conf
-COPY nginx_config/default.conf /etc/nginx/conf.d/default.conf
-
+RUN rm -rf ./*
+RUN mkdir  react
+COPY --from=build-stage /app/build ./react
 
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
