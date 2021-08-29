@@ -27,11 +27,12 @@ RUN yarn build
 # production stage
 FROM nginx:alpine as production-stage
 
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 WORKDIR /usr/share/nginx/html
 
 RUN rm -rf ./*
-RUN mkdir  react
-COPY --from=build-stage /app/build ./react
+COPY --from=build-stage /app/build ./
 
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
