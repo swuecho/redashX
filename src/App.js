@@ -17,6 +17,7 @@ import "antd/dist/antd.css";
 import Content from '!babel-loader!@mdx-js/loader!./Content.mdx'
 import Content2 from '!babel-loader!@mdx-js/loader!./Content2.mdx'
 import MyProTable from "./components/demo/ProEditTable";
+
 import { Card, Col, Row } from 'antd';
 
 
@@ -25,7 +26,7 @@ import { Card, Col, Row } from 'antd';
 export default function App() {
   return (
     <div className="App">
-      <Router>
+      <Router basename="/react" >
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
