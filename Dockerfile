@@ -25,15 +25,17 @@ RUN yarn build
 # COPY static ./dist/static
 
 # production stage
-FROM nginx:alpine as production-stage
+FROM mhart/alpine-node:12  as production-stage
+RUN npm install -g serve
 
-WORKDIR /usr/share/nginx/html
+WORKDIR /app
 
-RUN rm -rf ./*
-RUN mkdir  react
-COPY --from=build-stage /app/build ./react
+COPY package.json ./ 
+
+COPY --from=build-stage /app/build ./build
 
 EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+
+CMD ["serve", "-s", "build", "-l", "80", '-C']
 
 # docker run -it -p 9092:80 --rm --name sradmin_prod echowuhao/sradmin

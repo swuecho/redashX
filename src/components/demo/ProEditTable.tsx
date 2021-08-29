@@ -105,6 +105,7 @@ export default function MyProTable () {
       valueType: 'option',
       width: 200,
       render: (text, record, _, action) => [
+          // eslint-disable-next-line 
         <a
           key="editable"
           onClick={() => {
@@ -113,6 +114,7 @@ export default function MyProTable () {
         >
           编辑
         </a>,
+        // eslint-disable-next-line 
         <a
           key="delete"
           onClick={() => {

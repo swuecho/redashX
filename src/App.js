@@ -67,7 +67,10 @@ function Home() {
         </Card>
       </Col>
       <Col span={6}>
-        <Card title="Table" bordered={false} extra={ <a href="#">O</a>}>
+       
+        <Card title="Table" bordered={false} extra={ 
+                                                    // eslint-disable-next-line 
+                                                    <a href="#">O</a>}>
           <Link to="/table">Table</Link>
         </Card>
       </Col>
