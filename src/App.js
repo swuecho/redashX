@@ -25,7 +25,7 @@ import { Card, Col, Row } from 'antd';
 export default function App() {
   return (
     <div className="App">
-      <Router>
+      <Router basename="/react" >
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
         <Switch>
