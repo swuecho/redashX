@@ -3,15 +3,8 @@ import type { ProColumns } from '@ant-design/pro-table';
 import { EditableProTable } from '@ant-design/pro-table';
 // @typescript-eslint/no-unused-vars
 import { ProFormRadio, ProFormField } from '@ant-design/pro-form';
-import ProCard from '@ant-design/pro-card';
 import { pgrest_admin_client } from "../lib/pgrest";
-import ReactJson from 'react-json-view';
-// let uri = `excel_row?select=json&eid=eq.${props.eid}`;
-// pgclient
-// const { data, error } = await supabase
-//  .from('excel_row')
-//  .select('json')
-//  .eq('eid', 1)
+import { pick } from "lodash"
 
 const waitTime = (time: number = 100) => {
     return new Promise((resolve) => {
@@ -29,10 +22,47 @@ type DataSourceType = {
 };
 
 
-export default function MyProTable() {
+async function deleteExcelRow(eid: number, row_id: React.Key) {
+    //let data: DataSourceType[];
+    const { data, error } = await pgrest_admin_client
+        .from('excel_row')
+        .delete()
+        .match({ 'eid': eid, 'row_id': row_id as number });
+}
+
+async function insertExcelRow(eid: Number, json: DataSourceType, headers: string[]) {
+    //let data: DataSourceType[];
+    let json_content = pick(json, headers);
+    const { data, error } = await pgrest_admin_client
+        .from('excel_row')
+        .insert({ eid: eid, row_id: json['id'] as number, json: json_content })
+
+}
+
+
+async function upsertExcelRow(eid: Number, json: DataSourceType, headers: string[]) {
+    //let data: DataSourceType[];
+    let json_content = pick(json, headers);
+
+
+    const { data, error } = await pgrest_admin_client
+        .from('excel_row')
+        .update({ json: json_content })
+        .match({ eid: eid, row_id: json['id'] as number })
+    //.upsert({ eid: eid, row_id: json['id'] as number, json: json }, { onConflict: '(eid, row_id)' })
+}
+
+
+interface ExcelName {
+    name: string;
+    eid: number;
+}
+
+export default function MyProTable({ name, eid }: ExcelName) {
+    // state is tracked. one change and all related will change
     const [editableKeys, setEditableRowKeys] = useState<React.Key[]>([]);
     const [dataSource, setDataSource] = useState<DataSourceType[]>([]);
-    const eid: number = 1;
+    const [headerNames, setHeaderNames] = useState<string[]>([]);
 
     useEffect(() => {
         async function fetchExcelRows(eid: number) {
@@ -43,20 +73,18 @@ export default function MyProTable() {
                 .eq('eid', eid);
 
             setDataSource(data?.map((x) => x.json) as DataSourceType[]);
+            if (data && data.length > 0) {
+                setHeaderNames(Object.keys(data[0].json))
+            }
         }
         fetchExcelRows(eid)
     }, []);
     if (dataSource && dataSource.length > 0) {
-        console.log(dataSource)
-        let headers = Object.keys(dataSource[0])
-        let normalColumns = headers.map((x) => ({
-            title: x,
-            dataIndex: x
-        }))
-
-        console.log(normalColumns)
-
-
+        let normalColumns = headerNames.filter(x => x !=
+            'id').map((x) => ({
+                title: x,
+                dataIndex: x
+            }))
         const columns: ProColumns<DataSourceType>[] = [
             ...normalColumns,
             {
@@ -76,6 +104,8 @@ export default function MyProTable() {
                         key="delete"
                         onClick={() => {
                             // TODO: delete record.id from db
+                            deleteExcelRow(eid, record.id);
+                            // refetch data
                             setDataSource(dataSource.filter((item) => item.id !== record.id));
                         }}
                     >
@@ -89,12 +119,14 @@ export default function MyProTable() {
             <>
                 <EditableProTable<DataSourceType>
                     rowKey="id"
-                    headerTitle="可编辑表格"
+                    headerTitle={name}
                     recordCreatorProps={
                         {
                             position: 'top',
                             // create record and get the id
-                            record: () => ({ id: (Math.random() * 1000000).toFixed(0) }),
+                            record: () => {
+                                return { id: dataSource.length + 1 }
+                            }
                         }
                     }
                     columns={columns}
@@ -104,18 +136,21 @@ export default function MyProTable() {
                         type: 'multiple',
                         editableKeys,
                         onSave: async (rowKey, data, row) => {
-
                             // send data
                             console.log(rowKey, data, row);
+                            // new record , insert
+                            if (data.id > dataSource.length) {
+                                await insertExcelRow(eid, data, headerNames)
+                            } else {
+                                // udpate
+                                await upsertExcelRow(eid, data, headerNames)
+                            }
                             // TODO: save data into database
                             await waitTime(1000);
                         },
                         onChange: setEditableRowKeys,
                     }}
                 />
-                <ProCard title="表格数据" collapsible defaultCollapsed>
-                    <ReactJson src={dataSource} />
-                </ProCard>
             </>
         );
     }
