@@ -17,6 +17,7 @@ import "antd/dist/antd.css";
 import Content from '!babel-loader!@mdx-js/loader!./Content.mdx'
 import Content2 from '!babel-loader!@mdx-js/loader!./Content2.mdx'
 import MyProTable from "./components/demo/ProEditTable";
+import ExcelView from "./bestqa/Excel.tsx";
 
 import { Card, Col, Row } from 'antd';
 
@@ -35,6 +36,9 @@ export default function App() {
           </Route>
           <Route path="/users">
             <Content2 />
+          </Route>
+          <Route path="/excel">
+            <ExcelView></ExcelView>
           </Route>
           <Route path="/table">
             <MyProTable></MyProTable>
