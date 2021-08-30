@@ -1,10 +1,12 @@
 import React from "react";
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    useLocation,
+    Link
 } from "react-router-dom";
+
 
 import '@ant-design/pro-table/dist/table.css';
 import '@ant-design/pro-form/dist/form.css';
@@ -17,62 +19,76 @@ import "antd/dist/antd.css";
 import Content from '!babel-loader!@mdx-js/loader!./Content.mdx'
 import Content2 from '!babel-loader!@mdx-js/loader!./Content2.mdx'
 import MyProTable from "./components/demo/ProEditTable";
+import ExcelView from "./bestqa/Excel.tsx";
 
 import { Card, Col, Row } from 'antd';
 
 
+// A custom hook that builds on useLocation to parse
+// the query string for you.
+function useQuery() {
+    return new URLSearchParams(useLocation().search);
+}
 
 
 export default function App() {
-  return (
-    <div className="App">
-      <Router basename="/react" >
-        {/* A <Switch> looks through its children <Route>s and
+
+    return (
+        <div className="App">
+            <Router basename="/react" >
+                {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
-        <Switch>
-          <Route path="/about">
-            <Content />
-          </Route>
-          <Route path="/users">
-            <Content2 />
-          </Route>
-          <Route path="/table">
-            <MyProTable></MyProTable>
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </Router>
-    </div>
-  );
+                <Switch>
+                    <Route path="/about">
+                        <Content />
+                    </Route>
+                    <Route path="/users">
+                        <Content2 />
+                    </Route>
+                    <Route path="/excel">
+                        <ViewExecl></ViewExecl>
+                    </Route>
+                    <Route path="/table">
+                        <MyProTable />
+                    </Route>
+                    <Route path="/">
+                        <Home />
+                    </Route>
+                </Switch>
+            </Router>
+        </div>
+    );
 }
 
+function ViewExecl() {
+    let query = useQuery();
+    return <ExcelView name={query.get('name')} eid={query.get('eid')}></ExcelView>
+}
 function Home() {
-  return       <div className="site-card-wrapper">
-    <Row gutter={16}>
-      <Col span={6}>
-        <Card title="Card title" bordered={false}>
-          <Link to="/table">Table</Link>
-        </Card>
-      </Col>
-      <Col span={6}>
-        <Card title="Card title" bordered={false}>
-          <Link to="/about">About</Link>
-        </Card>
-      </Col>
-      <Col span={6}>
-        <Card title="Card title" bordered={false}>
-          <Link to="/users">Users</Link>
-        </Card>
-      </Col>
-      <Col span={6}>
-        <Card title="Table" bordered={false} extra={ <a href="#">O</a>}>
-          <Link to="/table">Table</Link>
-        </Card>
-      </Col>
-    </Row>
-  </div>
+    return <div className="site-card-wrapper">
+        <Row gutter={16}>
+            <Col span={6}>
+                <Card title="Table" bordered={false}>
+                    <Link to="/table">Table</Link>
+                </Card>
+            </Col>
+            <Col span={6}>
+                <Card title="Card title" bordered={false}>
+                    <Link to="/about">About</Link>
+                </Card>
+            </Col>
+            <Col span={6}>
+                <Card title="Card title" bordered={false}>
+                    <Link to="/users">Users</Link>
+                </Card>
+            </Col>
+            <Col span={6}>
+                <Card title="Excel" bordered={false} extra={<a href="#">O</a>}>
+                    <Link to="/excel?eid=1&name=test">Excel</Link>
+                </Card>
+            </Col>
+        </Row>
+    </div>
 }
 
 
