@@ -1,5 +1,6 @@
 import React, { useState, useEffect, lazy } from 'react';
-import shortid from 'shortid';
+import { nanoid } from 'nanoid'
+
 
 // page loader
 const importPage = (pageName: string) =>
@@ -17,9 +18,8 @@ function PageLoader({ pageName }: PageName) {
     const [page, setPage] = useState([]);
     useEffect(() => {
         async function loadPage() {
-            console.log(pageName)
             const Page = await importPage(pageName);
-            return <Page key={shortid.generate()} />;
+            return <Page key={nanoid()} />;
         }
         // @ts-ignore 
         loadPage().then(setPage)
