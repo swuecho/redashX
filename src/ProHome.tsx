@@ -16,7 +16,7 @@ import PageLoader from './PageLoader';
 
 function ProHome() {
     let location = useLocation();
-    let init_pathname = location.pathname.replace('/react/page', '')
+    let init_pathname = location.pathname.replace('/page', '')
     console.log(init_pathname)
     if (!!init_pathname) {
         init_pathname = '/welcome'
@@ -65,10 +65,8 @@ function ProHome() {
             menuItemRender={(item, dom) => (
                 <a
                     onClick={() => {
-                        console.log(dom);
                         console.log(item);
                         setPathname(item.path || '/welcome');
-                        window.location.pathname = `/react/page${pathname}`;
                     }}
                 >
                     {dom}
