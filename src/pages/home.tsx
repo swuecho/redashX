@@ -17,6 +17,7 @@ const content = (
 
 function PageContainerX() {
     return <PageContainer
+    title="BestQA"
         content={content}
         tabList={[
             {

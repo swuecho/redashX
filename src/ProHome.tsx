@@ -23,13 +23,19 @@ function ProHome() {
     >
         <ProLayout
             route={route}
+            {...settings}
+            title={"BestQA"}
+            menuHeaderRender={
+                (props) => {
+                    return <div className="logo"> 好问</div>;
+                }
+            }
             /* set path
             onPageChange= {
                 const { location } = history;
                 // 如果没有登录，重定向到 login
                 history.push(loginPath);
             },
-            */
             menuFooterRender={(props) => {
                 return (
                     <a
@@ -47,6 +53,7 @@ function ProHome() {
                     </a>
                 );
             }}
+            */
             onMenuHeaderClick={(e) => console.log(e)}
             menuItemRender={(item, dom) => (
                 <a
@@ -63,7 +70,6 @@ function ProHome() {
                     <Avatar shape="square" size="small" icon={<UserOutlined />} />
                 </div>
             )}
-            {...settings}
         >
             <PageLoader pageName={pathname} />
         </ProLayout>

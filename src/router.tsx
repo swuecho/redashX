@@ -35,6 +35,29 @@ const route =
             ],
         },
         {
+            path: '/report',
+            name: '报告',
+            icon: <AntDesignOutlined/>,
+            // access: 'canAdmin',
+            routes: [
+                {
+                    path: 'StockCb',
+                    name: '可转债',
+                    icon: <CrownOutlined />,
+                },
+                {
+                    path: 'sub-page2',
+                    name: '二级页面',
+                    icon: <CrownOutlined />,
+                },
+                {
+                    path: 'sub-page3',
+                    name: '三级页面',
+                    icon: <CrownOutlined />,
+                },
+            ],
+        },
+        {
             name: '列表页',
             icon: <TabletOutlined />,
             path: '/list',
@@ -73,6 +96,7 @@ const route =
                 },
             ],
         },
+        /*
         {
             // TODO: link to outside does not work
             path: 'https://ant.design',
@@ -80,6 +104,7 @@ const route =
             target: '_blank',
             icon: <AntDesignOutlined />,
         },
+        */
     ],
 };
 export default route
