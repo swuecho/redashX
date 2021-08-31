@@ -15,12 +15,12 @@ import {
     Link
 } from "react-router-dom";
 
-
 import MyProTable from "./components/demo/ProEditTable";
 import ExcelView from "./bestqa/Excel";
 
 import { Card, Col, Row } from 'antd';
 
+import ProHome from './ProHome';
 
 // A custom hook that builds on useLocation to parse
 // the query string for you.
@@ -69,68 +69,6 @@ function Home() {
     </div>
 }
 
-function ProHome() {
-    const [settings] = useState<Partial<ProSettings> | undefined>({ fixSiderbar: true });
-    const [pathname, setPathname] = useState('/welcome');
-    return <div
-        id="test-pro-layout"
-        style={{
-            height: '100vh',
-        }}
-    >
-        <ProLayout
-            route={route}
-            location={{
-                pathname,
-            }}
-            /* set path
-            onPageChange= {
-                const { location } = history;
-                // 如果没有登录，重定向到 login
-                history.push(loginPath);
-            },
-            */
-            menuFooterRender={(props) => {
-                return (
-                    <a
-                        style={{
-                            lineHeight: '48rpx',
-                            display: 'flex',
-                            height: 48,
-                            color: 'rgba(255, 255, 255, 0.65)',
-                            alignItems: 'center',
-                        }}
-                        href="https://preview.pro.ant.design/dashboard/analysis"
-                        target="_blank"
-                        rel="noreferrer"
-                    >
-                    </a>
-                );
-            }}
-            onMenuHeaderClick={(e) => console.log(e)}
-            menuItemRender={(item, dom) => (
-                <a
-                    onClick={() => {
-                        console.log(dom);
-                        console.log(item);
-                        setPathname(item.path || '/welcome');
-                    }}
-                >
-                    {dom}
-                </a>
-            )}
-            rightContentRender={() => (
-                <div>
-                    <Avatar shape="square" size="small" icon={<UserOutlined />} />
-                </div>
-            )}
-            {...settings}
-        >
-            <PageContainerX />
-        </ProLayout>
-    </div>
-
-}
 
 export default () => {
 
