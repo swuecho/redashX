@@ -1,5 +1,4 @@
-import React, { useState, useEffect, lazy } from 'react';
-import shortid from 'shortid';
+import React, { useState } from 'react';
 import { Avatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 
@@ -7,35 +6,8 @@ import type { ProSettings } from '@ant-design/pro-layout';
 import ProLayout from '@ant-design/pro-layout';
 import route from './router';
 
-// page loader
-const importPage = (pageName: string) =>
-    lazy(() =>
-        import(`./pages${pageName}`).catch(() =>
-            import(`./pages/home`)
-        )
-    );
+import PageLoader from './PageLoader';
 
-interface PageName {
-    pageName: string
-}
-
-function LoadPage({ pageName }: PageName) {
-    const [page, setPage] = useState([]);
-    useEffect(() => {
-        async function loadPage() {
-            console.log(pageName)
-            const Page = await importPage(pageName);
-            return <Page key={shortid.generate()} />;
-        }
-        // @ts-ignore 
-        loadPage().then(setPage)
-    }, [pageName]);
-    return (
-        <React.Suspense fallback="Loading views...">
-            <div className="container">{page}</div>
-        </React.Suspense>
-    );
-}
 
 function ProHome() {
     const [settings] = useState<Partial<ProSettings> | undefined>({ fixSiderbar: true });
@@ -96,7 +68,7 @@ function ProHome() {
             )}
             {...settings}
         >
-            <LoadPage pageName={pathname}></LoadPage>
+            <PageLoader pageName={pathname} />
         </ProLayout>
     </div>
 

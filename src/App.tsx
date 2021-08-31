@@ -1,12 +1,3 @@
-import React, { useState } from 'react';
-import { Button, Descriptions, Result, Avatar, Space, Statistic } from 'antd';
-import { LikeOutlined, UserOutlined } from '@ant-design/icons';
-
-import type { ProSettings } from '@ant-design/pro-layout';
-import ProLayout, { PageContainer } from '@ant-design/pro-layout';
-import route from './router';
-import { PageLoading } from '@ant-design/pro-layout';
-import PageContainerX from "./pages/PageContainTable";
 import {
     BrowserRouter as Router,
     Switch,
@@ -29,9 +20,6 @@ function useQuery() {
 }
 
 
-export const initialStateConfig = {
-    loading: <PageLoading />,
-};
 
 function ViewExecl() {
     let query = useQuery();
@@ -73,7 +61,7 @@ function Home() {
 export default () => {
 
     return (
-        <div className="App">
+        <div>
             <Router basename="/react" >
                 {/* A <Switch> looks through its children <Route>s and
         renders the first one that matches the current URL. */}

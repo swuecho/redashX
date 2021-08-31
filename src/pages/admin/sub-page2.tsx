@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
+import { PageContainer } from '@ant-design/pro-layout';
 
 export default () => {
-    return <div>New Page sub page 2</div>;
+    return <PageContainer
+    >
+        <div>New Page admin 2 </div>
+    </PageContainer>
 };
