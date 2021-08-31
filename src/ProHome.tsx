@@ -25,6 +25,8 @@ function ProHome() {
             route={route}
             {...settings}
             title={"BestQA"}
+            primaryColor = "#1890ff"
+            navTheme="light"
             menuHeaderRender={
                 (props) => {
                     return <div className="logo"> 好问</div>;
