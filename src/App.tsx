@@ -81,6 +81,9 @@ export default () => {
                     <Route path="/home">
                         <Home />
                     </Route>
+                    <Route path="/page">
+                        <ProHome />
+                    </Route>
                     <Route path="/">
                         <ProHome />
                     </Route>
