@@ -13,7 +13,7 @@ function ProHome() {
     let history = useHistory();
 
     const [settings] = useState<Partial<ProSettings> | undefined>({ fixSiderbar: true });
-    const [pathname, setPathname] = useState('./welcome');
+    const [pathname, setPathname] = useState('/welcome');
 
     return <div
         id="bestqa-pro-layout"
