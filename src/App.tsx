@@ -3,13 +3,10 @@ import {
     Switch,
     Route,
     useLocation,
-    Link
 } from "react-router-dom";
 
 import MyProTable from "./components/demo/ProEditTable";
 import ExcelView from "./bestqa/Excel";
-
-import { Card, Col, Row } from 'antd';
 
 import ProHome from './ProHome';
 
@@ -31,7 +28,7 @@ function ViewExecl() {
     return null;
 }
 
-export default () => {
+const App = () => {
 
     return (
         <div>
@@ -60,3 +57,5 @@ export default () => {
 
     );
 };
+
+export default App;

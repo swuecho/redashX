@@ -9,27 +9,11 @@ import route from './router';
 import PageLoader from './PageLoader';
 import { useHistory } from "react-router-dom";
 
-
-import {
-    BrowserRouter as Router,
-    Switch,
-    useLocation
-} from "react-router-dom"
-import path from 'path/posix';
-
 function ProHome() {
     let history = useHistory();
-    let location = useLocation();
-    let init_pathname = location.pathname.replace('/page', '')
-    console.log(init_pathname)
-    if (!init_pathname) {
-        init_pathname = '/welcome'
-    }
 
     const [settings] = useState<Partial<ProSettings> | undefined>({ fixSiderbar: true });
-    const [pathname, setPathname] = useState(init_pathname);
-    console.log(pathname)
-
+    const [pathname, setPathname] = useState('./welcome');
 
     return <div
         id="bestqa-pro-layout"
