@@ -7,11 +7,28 @@ import ProLayout from '@ant-design/pro-layout';
 import route from './router';
 
 import PageLoader from './PageLoader';
+import { useHistory } from "react-router-dom";
 
+
+import {
+    BrowserRouter as Router,
+    Switch,
+    useLocation
+} from "react-router-dom"
+import path from 'path/posix';
 
 function ProHome() {
+    let history = useHistory();
+    let location = useLocation();
+    let init_pathname = location.pathname.replace('/page', '')
+    console.log(init_pathname)
+    if (!init_pathname) {
+        init_pathname = '/welcome'
+    }
+
     const [settings] = useState<Partial<ProSettings> | undefined>({ fixSiderbar: true });
-    const [pathname, setPathname] = useState('/welcome');
+    const [pathname, setPathname] = useState(init_pathname);
+    console.log(pathname)
 
 
     return <div
@@ -22,9 +39,6 @@ function ProHome() {
     >
         <ProLayout
             route={route}
-            location={{
-                pathname,
-            }}
             /* set path
             onPageChange= {
                 const { location } = history;
@@ -53,8 +67,7 @@ function ProHome() {
             menuItemRender={(item, dom) => (
                 <a
                     onClick={() => {
-                        console.log(dom);
-                        console.log(item);
+                        history.push(item.path || '/welcome');
                         setPathname(item.path || '/welcome');
                     }}
                 >

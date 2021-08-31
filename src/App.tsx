@@ -30,33 +30,6 @@ function ViewExecl() {
     }
     return null;
 }
-function Home() {
-    return <div className="site-card-wrapper">
-        <Row gutter={16}>
-            <Col span={6}>
-                <Card title="Table" bordered={false}>
-                    <Link to="/table">Table</Link>
-                </Card>
-            </Col>
-            <Col span={6}>
-                <Card title="Card title" bordered={false}>
-                    <Link to="/about">About</Link>
-                </Card>
-            </Col>
-            <Col span={6}>
-                <Card title="Card title" bordered={false}>
-                    <Link to="/users">Users</Link>
-                </Card>
-            </Col>
-            <Col span={6}>
-                <Card title="Excel" bordered={false} extra={<a href="#">O</a>}>
-                    <Link to="/excel?eid=1&name=test">Excel</Link>
-                </Card>
-            </Col>
-        </Row>
-    </div>
-}
-
 
 export default () => {
 
@@ -77,9 +50,6 @@ export default () => {
                     </Route>
                     <Route path="/table">
                         <MyProTable />
-                    </Route>
-                    <Route path="/home">
-                        <Home />
                     </Route>
                     <Route path="/">
                         <ProHome />
