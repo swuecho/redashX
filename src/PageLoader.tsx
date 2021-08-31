@@ -26,7 +26,7 @@ function PageLoader({ pageName }: PageName) {
     }, [pageName]);
     return (
         <React.Suspense fallback="Loading views...">
-            <div className="container">{page}</div>
+            <>{page} </>
         </React.Suspense>
     );
 }

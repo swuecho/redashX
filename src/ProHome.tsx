@@ -15,7 +15,7 @@ function ProHome() {
 
 
     return <div
-        id="test-pro-layout"
+        id="bestqa-pro-layout"
         style={{
             height: '100vh',
         }}
