@@ -3,13 +3,10 @@ import {
     Switch,
     Route,
     useLocation,
-    Link
 } from "react-router-dom";
 
 import MyProTable from "./components/demo/ProEditTable";
 import ExcelView from "./bestqa/Excel";
-
-import { Card, Col, Row } from 'antd';
 
 import ProHome from './ProHome';
 
@@ -30,35 +27,8 @@ function ViewExecl() {
     }
     return null;
 }
-function Home() {
-    return <div className="site-card-wrapper">
-        <Row gutter={16}>
-            <Col span={6}>
-                <Card title="Table" bordered={false}>
-                    <Link to="/table">Table</Link>
-                </Card>
-            </Col>
-            <Col span={6}>
-                <Card title="Card title" bordered={false}>
-                    <Link to="/about">About</Link>
-                </Card>
-            </Col>
-            <Col span={6}>
-                <Card title="Card title" bordered={false}>
-                    <Link to="/users">Users</Link>
-                </Card>
-            </Col>
-            <Col span={6}>
-                <Card title="Excel" bordered={false} extra={<a href="#">O</a>}>
-                    <Link to="/excel?eid=1&name=test">Excel</Link>
-                </Card>
-            </Col>
-        </Row>
-    </div>
-}
 
-
-export default () => {
+const App = () => {
 
     return (
         <div>
@@ -78,9 +48,6 @@ export default () => {
                     <Route path="/table">
                         <MyProTable />
                     </Route>
-                    <Route path="/home">
-                        <Home />
-                    </Route>
                     <Route path="/">
                         <ProHome />
                     </Route>
@@ -90,3 +57,5 @@ export default () => {
 
     );
 };
+
+export default App;

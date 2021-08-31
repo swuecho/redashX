@@ -7,12 +7,13 @@ import ProLayout from '@ant-design/pro-layout';
 import route from './router';
 
 import PageLoader from './PageLoader';
-
+import { useHistory } from "react-router-dom";
 
 function ProHome() {
-    const [settings] = useState<Partial<ProSettings> | undefined>({ fixSiderbar: true });
-    const [pathname, setPathname] = useState('/welcome');
+    let history = useHistory();
 
+    const [settings] = useState<Partial<ProSettings> | undefined>({ fixSiderbar: true });
+    const [pathname, setPathname] = useState('./welcome');
 
     return <div
         id="bestqa-pro-layout"
@@ -22,9 +23,6 @@ function ProHome() {
     >
         <ProLayout
             route={route}
-            location={{
-                pathname,
-            }}
             /* set path
             onPageChange= {
                 const { location } = history;
@@ -53,8 +51,7 @@ function ProHome() {
             menuItemRender={(item, dom) => (
                 <a
                     onClick={() => {
-                        console.log(dom);
-                        console.log(item);
+                        history.push(item.path || '/welcome');
                         setPathname(item.path || '/welcome');
                     }}
                 >

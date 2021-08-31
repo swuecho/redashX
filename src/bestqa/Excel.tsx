@@ -1,3 +1,4 @@
+//@ts-ignore @typescript-eslint/no-unused-vars
 import React, { useState, useEffect } from 'react';
 import type { ProColumns } from '@ant-design/pro-table';
 import { EditableProTable } from '@ant-design/pro-table';
