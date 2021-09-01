@@ -5,54 +5,9 @@ import { EditableProTable } from '@ant-design/pro-table';
 // @typescript-eslint/no-unused-vars
 import { ProFormRadio, ProFormField } from '@ant-design/pro-form';
 import { pgrest_admin_client } from "../lib/pgrest";
-import { pick } from "lodash"
-
-const waitTime = (time: number = 100) => {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve(true);
-        }, time);
-    });
-};
-
-type DataSourceType = {
-    id: React.Key;
-    //name?: string;
-    [key: string]: string | React.Key;
-    //children?: DataSourceType[];
-};
-
-
-async function deleteExcelRow(eid: number, row_id: React.Key) {
-    //let data: DataSourceType[];
-    const { data, error } = await pgrest_admin_client
-        .from('excel_row')
-        .delete()
-        .match({ 'eid': eid, 'row_id': row_id as number });
-}
-
-async function insertExcelRow(eid: Number, json: DataSourceType, headers: string[]) {
-    //let data: DataSourceType[];
-    let json_content = pick(json, headers);
-    const { data, error } = await pgrest_admin_client
-        .from('excel_row')
-        .insert({ eid: eid, row_id: json['id'] as number, json: json_content })
-
-}
-
-
-async function upsertExcelRow(eid: Number, json: DataSourceType, headers: string[]) {
-    //let data: DataSourceType[];
-    let json_content = pick(json, headers);
-
-
-    const { data, error } = await pgrest_admin_client
-        .from('excel_row')
-        .update({ json: json_content })
-        .match({ eid: eid, row_id: json['id'] as number })
-    //.upsert({ eid: eid, row_id: json['id'] as number, json: json }, { onConflict: '(eid, row_id)' })
-}
-
+import { waitTime } from "../lib/util"
+import type { DataSourceType } from "../types"
+import { deleteExcelRow, insertExcelRow, upsertExcelRow } from "../api/excel"
 
 interface ExcelName {
     name: string;
