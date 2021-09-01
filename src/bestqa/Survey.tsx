@@ -8,6 +8,8 @@ import { surveyjs2ProTable } from "../lib/survey";
 import axios from "axios";
 import { hostname } from '../lib/config';
 import { genRecordID } from "../lib/survey";
+import { pgrest_survey_client } from "../lib/pgrest";
+
 
 
 const waitTime = (time: number = 100) => {
@@ -18,6 +20,19 @@ const waitTime = (time: number = 100) => {
     });
 };
 
+async function saveRecord(surveyName: string, data: DataSourceType) {
+    let ridName = `${surveyName}-rid`
+    const headers: Record<string, string> = {
+        'Content-Type': 'application/json',
+    }
+    headers[ridName] = data['id'] as string;
+    let result = await axios.post(`${hostname()}/sr/${surveyName}`, data, {
+        headers,
+        withCredentials: true
+    })
+    console.log(result)
+}
+
 type DataSourceType = {
     id: React.Key;
     //name?: string;
@@ -27,6 +42,20 @@ type DataSourceType = {
 
 const defaultData: DataSourceType[] = [
 ];
+
+const defaultSystemDataLength = Object.keys({
+    "id": "testdLUho4",
+    "extra": null,
+    "status": "F",
+    "start_time": "2021-09-01T11:27:46.409562",
+    "last_modified": "2021-09-01T11:27:46.409562",
+    "Q_BESTQA_GET_IP": "192.168.0.147",
+    "Q_BESTQA_GET_UA": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36",
+    "Q_BESTQA_GET_CITY": "",
+    "Q_BESTQA_GET_REFERER": "http://192.168.0.97:8080/survey/dashboard?id=bestqa_protable&editor=visual",
+    "Q_BESTQA_GET_LOCATION": "{\"status\": \"1\", \"info\": \"OK\", \"infocode\": \"10000\", \"adcode\": \"000000\", \"rectangle\": \"\", \"country\": \"局域网\", \"city\": \"\", \"province\": \"局域网\"}",
+    "Q_BESTQA_GET_PROVINCE": "局域网"
+}).length
 
 export default function Survey() {
     //@ts-ignore
@@ -48,6 +77,16 @@ export default function Survey() {
         fetchSurveyJson(sid)
     }, []);
 
+    useEffect(() => {
+        async function fetchAllRows(surveyName: string) {
+            //let data: DataSourceType[];
+            const { data, error } = await pgrest_survey_client
+                .from(`v_${surveyName}_answer_json`)
+            //@ts-ignore
+            setDataSource(data?.map((x) => x.answer)?.filter(x => Object.keys(x).length > defaultSystemDataLength) as DataSourceType[]);
+        }
+        fetchAllRows(sid)
+    }, []);
 
     const columns: ProColumns<DataSourceType>[] = [
         ...columnHeaders,
@@ -128,7 +167,10 @@ export default function Survey() {
 
                         // send data
                         console.log(rowKey, data, row);
-                        await waitTime(2000);
+                        // new record , insert
+                        // udpate
+                        await saveRecord(sid, data);
+                        await waitTime(1000);
                     },
                     onChange: setEditableRowKeys,
                 }}
