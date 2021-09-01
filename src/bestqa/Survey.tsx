@@ -81,7 +81,6 @@ export default function Survey() {
             <EditableProTable<DataSourceType>
                 rowKey="id"
                 headerTitle={sid}
-                maxLength={5}
                 recordCreatorProps={
                     position !== 'hidden'
                         ? {
