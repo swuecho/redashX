@@ -14,3 +14,12 @@ export function epoch2ID(epoch: number): string {
         return hexDay + current_nanoid
     }
 }
+
+
+export const waitTime = (time: number = 100) => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            resolve(true);
+        }, time);
+    });
+};

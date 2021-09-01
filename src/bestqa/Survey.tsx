@@ -9,50 +9,10 @@ import axios from "axios";
 import { hostname } from '../lib/config';
 import { genRecordID } from "../lib/survey";
 import { pgrest_survey_client } from "../lib/pgrest";
+import { deleteRecord, saveRecord } from '../api/survey';
+import { waitTime } from "../lib/util"
+import type { DataSourceType } from "../types"
 
-
-
-const waitTime = (time: number = 100) => {
-    return new Promise((resolve) => {
-        setTimeout(() => {
-            resolve(true);
-        }, time);
-    });
-};
-
-
-async function deleteRecord(surveyName: string, rid: React.Key) {
-    let ridName = `${surveyName}-rid`
-    const headers: Record<string, string> = {
-        'Content-Type': 'application/json',
-    }
-    headers[ridName] = rid as string;
-    let result = await axios.delete(`${hostname()}/sr/${surveyName}`, {
-        headers,
-        withCredentials: true
-    })
-    console.log(result)
-}
-
-async function saveRecord(surveyName: string, data: DataSourceType) {
-    let ridName = `${surveyName}-rid`
-    const headers: Record<string, string> = {
-        'Content-Type': 'application/json',
-    }
-    headers[ridName] = data['id'] as string;
-    let result = await axios.post(`${hostname()}/sr/${surveyName}`, data, {
-        headers,
-        withCredentials: true
-    })
-    console.log(result)
-}
-
-type DataSourceType = {
-    id: React.Key;
-    //name?: string;
-    [key: string]: string | React.Key;
-    //children?: DataSourceType[];
-};
 
 const defaultData: DataSourceType[] = [
 ];

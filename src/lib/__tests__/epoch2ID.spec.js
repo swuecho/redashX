@@ -1,6 +1,6 @@
 import {
     epoch2ID
-} from './../lib/util'
+} from '../util'
 
 //  {"time1", args{1643243543}, "4a4bxdwuKU"},
 // {"time2", args{3397334400}, "9999ObkriV"},
