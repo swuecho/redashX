@@ -1,7 +1,7 @@
 import { surveyjsQuestion2ProTable } from '../survey'
 import {
     survey2ProTable
-} from '../survey.js'
+} from '../survey'
 
 // each page, each form
 // TODO: only do first page.

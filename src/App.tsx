@@ -6,6 +6,8 @@ import {
 } from "react-router-dom";
 
 import MyProTable from "./components/demo/ProEditTable";
+import Survey from "./bestqa/Survey";
+
 import ExcelView from "./bestqa/Excel";
 
 import ProHome from './ProHome';
@@ -36,8 +38,8 @@ const App = () => {
                 {/* A <Switch> looks through its children <Route>s and
         renders the first one that matches the current URL. */}
                 <Switch>
-                    <Route path="/about">
-                        <MyProTable />
+                    <Route path="/st/:sid">
+                        <Survey />
                     </Route>
                     <Route path="/users">
                         <MyProTable />
