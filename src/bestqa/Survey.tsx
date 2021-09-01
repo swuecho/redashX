@@ -83,7 +83,7 @@ export default function Survey() {
             const { data, error } = await pgrest_survey_client
                 .from(`v_${surveyName}_answer_json`)
             //@ts-ignore
-            setDataSource(data?.map((x) => x.answer)?.filter(x => Object.keys(x).length > defaultSystemDataLength) as DataSourceType[]);
+            setDataSource(data?.map((x) => ({ id: x.rid, ...x.json })) as DataSourceType[]);
         }
         fetchAllRows(sid)
     }, []);
