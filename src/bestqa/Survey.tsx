@@ -20,6 +20,20 @@ const waitTime = (time: number = 100) => {
     });
 };
 
+
+async function deleteRecord(surveyName: string, rid: React.Key) {
+    let ridName = `${surveyName}-rid`
+    const headers: Record<string, string> = {
+        'Content-Type': 'application/json',
+    }
+    headers[ridName] = rid as string;
+    let result = await axios.delete(`${hostname()}/sr/${surveyName}`, {
+        headers,
+        withCredentials: true
+    })
+    console.log(result)
+}
+
 async function saveRecord(surveyName: string, data: DataSourceType) {
     let ridName = `${surveyName}-rid`
     const headers: Record<string, string> = {
@@ -42,20 +56,6 @@ type DataSourceType = {
 
 const defaultData: DataSourceType[] = [
 ];
-
-const defaultSystemDataLength = Object.keys({
-    "id": "testdLUho4",
-    "extra": null,
-    "status": "F",
-    "start_time": "2021-09-01T11:27:46.409562",
-    "last_modified": "2021-09-01T11:27:46.409562",
-    "Q_BESTQA_GET_IP": "192.168.0.147",
-    "Q_BESTQA_GET_UA": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36",
-    "Q_BESTQA_GET_CITY": "",
-    "Q_BESTQA_GET_REFERER": "http://192.168.0.97:8080/survey/dashboard?id=bestqa_protable&editor=visual",
-    "Q_BESTQA_GET_LOCATION": "{\"status\": \"1\", \"info\": \"OK\", \"infocode\": \"10000\", \"adcode\": \"000000\", \"rectangle\": \"\", \"country\": \"局域网\", \"city\": \"\", \"province\": \"局域网\"}",
-    "Q_BESTQA_GET_PROVINCE": "局域网"
-}).length
 
 export default function Survey() {
     //@ts-ignore
@@ -105,7 +105,8 @@ export default function Survey() {
                 </a>,
                 <a
                     key="delete"
-                    onClick={() => {
+                    onClick={async () => {
+                        await deleteRecord(sid, record.id);
                         setDataSource(dataSource.filter((item) => item.id !== record.id));
                     }}
                 >
