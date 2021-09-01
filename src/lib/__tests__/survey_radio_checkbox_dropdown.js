@@ -1,6 +1,6 @@
 import { surveyjsQuestion2ProTable } from '../survey'
 import {
-    survey2ProTable
+    surveyjs2ProTable
 } from '../survey'
 
 // each page, each form
@@ -44,4 +44,8 @@ let expected_json = {
 
 test('rand str', () => {
     expect(surveyjsQuestion2ProTable(input_json)).toEqual(expected_json)
+})
+
+test('surveyjs ', () => {
+    expect(surveyjs2ProTable(survey_json)).toEqual([expected_json])
 })

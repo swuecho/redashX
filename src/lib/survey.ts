@@ -1,5 +1,12 @@
 // @ts-ignore
 import { transform } from "node-json-transform";
+import { epoch2ID } from "./util";
+
+
+export function genRecordID() {
+    let epoch = Math.floor(new Date().getTime() / 1000)
+    return epoch2ID(epoch)
+}
 
 const type_mapper: Record<string, string> = {
     radiogroup: "radio",

@@ -7,7 +7,7 @@ import ProCard from '@ant-design/pro-card';
 import { surveyjs2ProTable } from "../lib/survey";
 import axios from "axios";
 import { hostname } from '../lib/config';
-
+import { genRecordID } from "../lib/survey";
 
 
 const waitTime = (time: number = 100) => {
@@ -39,15 +39,11 @@ export default function Survey() {
     useEffect(() => {
         async function fetchSurveyJson(surveyName: string) {
             // TODO: api to get surveyjs json
-            console.log(hostname())
             let hostname_str = hostname()
-            console.log(hostname_str)
             let surveyjsResp = await axios.get(`${hostname_str}/go/survey/${surveyName}`);
-            console.log(surveyjsResp)
             let surveyjsJson = surveyjs2ProTable(JSON.parse(surveyjsResp.data))
             //let data: DataSourceType[];
             setColumnHeaders(surveyjsJson as unknown as ProColumns<DataSourceType>[])
-            console.log(columnHeaders)
         }
         fetchSurveyJson(sid)
     }, []);
@@ -90,7 +86,7 @@ export default function Survey() {
                     position !== 'hidden'
                         ? {
                             position: position as 'top',
-                            record: () => ({ id: (Math.random() * 1000000).toFixed(0) }),
+                            record: () => ({ id: genRecordID() }),
                         }
                         : false
                 }
