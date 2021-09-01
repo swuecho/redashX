@@ -6,6 +6,8 @@ const type_mapper = {
     checkbox: "checkbox",
     dropdown: "select",
     text: "text",
+    rating: "rate",
+    boolean: "switch",
     comment: "textarea"
 }
 
@@ -28,7 +30,7 @@ export function surveyjsQuestion2ProTable(surveyjsQuestion) {
         ],
         // Not required.  Runs after object mapping and operations.  Allows access to each item for manipulation.
         each: function (item) {  
-            let textType = new Set(["text", "textarea"])
+            let textType = new Set(["text", "textarea", "rate", "switch"])
             if (textType.has(item['valueType'])) {
                 delete item['fieldProps']
             }
