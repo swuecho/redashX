@@ -14,7 +14,7 @@ interface ExcelName {
     eid: number;
 }
 
-export default function MyProTable({ name, eid }: ExcelName) {
+export default function ExcelProTable({ name, eid }: ExcelName) {
     // state is tracked. one change and all related will change
     const [editableKeys, setEditableRowKeys] = useState<React.Key[]>([]);
     const [dataSource, setDataSource] = useState<DataSourceType[]>([]);
