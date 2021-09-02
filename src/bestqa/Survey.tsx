@@ -165,7 +165,7 @@ export default function Survey() {
                         // new record , insert
                         // udpate
                         await saveRecord(sid, data);
-                        await waitTime(1000);
+                        await waitTime(500);
                     },
                     onChange: setEditableRowKeys,
                 }}
