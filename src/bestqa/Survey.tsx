@@ -30,12 +30,87 @@ export default function Survey() {
             // TODO: api to get surveyjs json
             let hostname_str = hostname()
             let surveyjsResp = await axios.get(`${hostname_str}/go/survey/${surveyName}`);
-            let surveyjsJson = surveyjs2ProTable(JSON.parse(surveyjsResp.data))
+            let surveyjsJson = surveyjs2ProTable(surveyjsResp.data)
             //let data: DataSourceType[];
+            //@ts-ignore
+            for (let columnDef of surveyjsJson) {
+                console.log(columnDef)
+                if (columnDef['filters']) {
+                    let dataIndex = columnDef['dataIndex']
+                    //@ts-ignore
+                    let onFilter = (value, record) => {
+                        console.log(value)
+                        console.log(record)
+                        console.log(record[dataIndex] == value)
+                        return record[dataIndex] == value
+                    }
+                    columnDef['onFilter'] = onFilter
+                }
+                if (columnDef['sorter']) {
+                    let columndataIndex = columnDef['dataIndex']
+                    //@ts-ignore better '10'.localeCompare('2', undefined, {numeric: true, sensitivity: 'base'})
+                    let sorterFn = (a, b) => {
+                        console.log(a, b)
+                        return a[columndataIndex] > b[columndataIndex]
+                    }
+                    columnDef['sorter'] = sorterFn
+                }
+
+            }
+            let firstCol = {
+                "title": "请选择一个选项X",
+                "dataIndex": "Q1",
+                "valueType": "radio",
+                "initialValue": "1",
+                "fieldProps": {
+                    "options": [
+                        {
+                            "label": "选项1",
+                            "value": "1"
+                        },
+                        {
+                            "label": "选项2",
+                            "value": "2"
+                        },
+                        {
+                            "label": "选项3",
+                            "value": "3"
+                        },
+                        {
+                            "label": "选项4",
+                            "value": "4"
+                        }
+                    ]
+                },
+                //@ts-ignore
+                sorter: (a, b) => a["Q1"] > b["Q1"],
+                "filters": [
+                    {
+                        "text": "选项1",
+                        "value": "1"
+                    },
+                    {
+                        "text": "选项2",
+                        "value": "2"
+                    },
+                    {
+                        "text": "选项3",
+                        "value": "3"
+                    },
+                    {
+                        "text": "选项4",
+                        "value": "4"
+                    }
+                ],
+                //@ts-ignore
+                onFilter: (value, record) => record['Q1'] == value
+            }
+            //@ts-ignore
+            // surveyjsJson[0] = firstCol
             setColumnHeaders(surveyjsJson as unknown as ProColumns<DataSourceType>[])
         }
         fetchSurveyJson(sid)
-    }, []);
+    }, [sid]);
 
     useEffect(() => {
         async function fetchAllRows(surveyName: string) {
@@ -46,7 +121,7 @@ export default function Survey() {
             setDataSource(data?.map((x) => ({ id: x.rid, ...x.json })) as DataSourceType[]);
         }
         fetchAllRows(sid)
-    }, []);
+    }, [sid]);
 
     const columns: ProColumns<DataSourceType>[] = [
         ...columnHeaders,

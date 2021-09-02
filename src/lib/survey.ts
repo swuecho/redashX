@@ -24,22 +24,33 @@ export function surveyjsQuestion2ProTable(surveyjsQuestion: JSON): JSON {
         item: {
             title: "title",
             dataIndex: "name",
+            valueType: "type",
+            initialValue: "defaultValue",
             fieldProps: { options: "choices" },
-            valueType: "type"
+            filters: "choices"
         },
         operate: [
             {
                 run: function (val: string) { return type_mapper[val] }, on: "valueType"
             },
             {
-                run: function (opts: any[]) { return opts ? opts.map((opt: { text: any; value: any; }) => ({ label: opt.text, value: opt.value })) : undefined }, on: "fieldProps.options"
+                run: function (opts: any[]) { return opts ? opts.map((opt: { text: any; value: any; meta: any }) => ({ label: opt.text, value: opt.value, ...opt.meta })) : undefined }, on: "fieldProps.options"
             }
         ],
         // Not required.  Runs after object mapping and operations.  Allows access to each item for manipulation.
         each: function (item: any) {
-            let textType = new Set(["text", "textarea", "rate", "switch"])
+            let textType = new Set(["text", "textarea", "rate"])
+            if (item['valueType'] == 'rate') {
+                item['filters'] = [1, 2, 3, 4, 5].map(num => ({ text: `${num}星`, value: num }))
+            }
+
             if (textType.has(item['valueType'])) {
                 delete item['fieldProps']
+            } else {
+                item['sorter'] = true
+            }
+            if (item['valueType'] == 'textarea' || item['valueType'] == 'text') {
+                item['copyable'] = true
             }
             return item;
         }
