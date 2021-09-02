@@ -14,9 +14,6 @@ import { waitTime } from "../lib/util"
 import type { DataSourceType } from "../types"
 
 
-const defaultData: DataSourceType[] = [
-];
-
 export default function Survey() {
     //@ts-ignore
     let { sid } = useParams();
