@@ -24,15 +24,15 @@ export function surveyjsQuestion2ProTable(surveyjsQuestion: JSON): JSON {
         item: {
             title: "title",
             dataIndex: "name",
-            fieldProps: { options: "choices" },
-            valueType: "type"
+            valueType: "type",
+            fieldProps: { options: "choices" }
         },
         operate: [
             {
                 run: function (val: string) { return type_mapper[val] }, on: "valueType"
             },
             {
-                run: function (opts: any[]) { return opts ? opts.map((opt: { text: any; value: any; }) => ({ label: opt.text, value: opt.value })) : undefined }, on: "fieldProps.options"
+                run: function (opts: any[]) { return opts ? opts.map((opt: { text: any; value: any; meta: any }) => ({ label: opt.text, value: opt.value, ...opt.meta })) : undefined }, on: "fieldProps.options"
             }
         ],
         // Not required.  Runs after object mapping and operations.  Allows access to each item for manipulation.
@@ -40,6 +40,9 @@ export function surveyjsQuestion2ProTable(surveyjsQuestion: JSON): JSON {
             let textType = new Set(["text", "textarea", "rate", "switch"])
             if (textType.has(item['valueType'])) {
                 delete item['fieldProps']
+            }
+            if (item['valueType'] == 'textarea' || item['valueType'] == 'text' ) {
+               item['copyable'] = true
             }
             return item;
         }

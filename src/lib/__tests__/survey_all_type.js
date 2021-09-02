@@ -20,8 +20,8 @@ let elements = surveyjs_json['pages'][0]['elements']
 
 let expected_json_all = [{ "dataIndex": "Q1", "fieldProps": { "options": [{ "label": "选项1", "value": "1" }, { "label": "选项2", "value": "2" }, { "label": "选项3", "value": "3" }, { "label": "选项4", "value": "4" }] }, "title": "请选择一个选项", "valueType": "radio" },
 { "dataIndex": "Q2", "fieldProps": { "options": [{ "label": "选项1", "value": "1" }, { "label": "选项2", "value": "2" }, { "label": "选项3", "value": "3" }] }, "title": "问题描述", "valueType": "checkbox" },
-{ "dataIndex": "Q3", "title": "问题描述", "valueType": "text" },
-{ "dataIndex": "Q4", "title": "问题描述", "valueType": "textarea" },
+{ "dataIndex": "Q3", "title": "问题描述", "valueType": "text" , "copyable": true},
+{ "dataIndex": "Q4", "title": "问题描述", "valueType": "textarea",  "copyable": true },
 { "dataIndex": "Q5", "title": "问题描述", "valueType": "rate" },
 { "dataIndex": "Q6", "fieldProps": { "options": [{ "label": "选项1", "value": "1" }, { "label": "选项2", "value": "2" }, { "label": "选项3", "value": "3" }] }, "title": "问题描述", "valueType": "select" },
 { "dataIndex": "Q7", "title": "是否同意", "valueType": "switch" }]

@@ -30,8 +30,9 @@ export default function Survey() {
             // TODO: api to get surveyjs json
             let hostname_str = hostname()
             let surveyjsResp = await axios.get(`${hostname_str}/go/survey/${surveyName}`);
-            let surveyjsJson = surveyjs2ProTable(JSON.parse(surveyjsResp.data))
+            let surveyjsJson = surveyjs2ProTable(surveyjsResp.data)
             //let data: DataSourceType[];
+            console.log(surveyjsJson)
             setColumnHeaders(surveyjsJson as unknown as ProColumns<DataSourceType>[])
         }
         fetchSurveyJson(sid)
