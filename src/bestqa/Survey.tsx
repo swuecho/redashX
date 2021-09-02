@@ -14,9 +14,6 @@ import { waitTime } from "../lib/util"
 import type { DataSourceType } from "../types"
 
 
-const defaultData: DataSourceType[] = [
-];
-
 export default function Survey() {
     //@ts-ignore
     let { sid } = useParams();
@@ -34,93 +31,34 @@ export default function Survey() {
             //let data: DataSourceType[];
             //@ts-ignore
             for (let columnDef of surveyjsJson) {
-                console.log(columnDef)
                 if (columnDef['filters']) {
-                    let dataIndex = columnDef['dataIndex']
-                    //@ts-ignore
-                    let onFilter = (value, record) => {
-                        console.log(value)
-                        console.log(record)
-                        console.log(record[dataIndex] == value)
-                        return record[dataIndex] == value
-                    }
-                    columnDef['onFilter'] = onFilter
+                    columnDef['onFilter'] = true
                 }
                 if (columnDef['sorter']) {
                     let columndataIndex = columnDef['dataIndex']
-                    //@ts-ignore better '10'.localeCompare('2', undefined, {numeric: true, sensitivity: 'base'})
-                    let sorterFn = (a, b) => {
-                        console.log(a, b)
-                        return a[columndataIndex] > b[columndataIndex]
+                    if (columnDef['valueType'] == 'switch') {
+                        //@ts-ignore
+                        columnDef['sorter'] = (a, b) => a[columndataIndex] > b[columndataIndex]
+                    } else {
+
+                        //@ts-ignore better '10'.localeCompare('2', undefined, {numeric: true, sensitivity: 'base'})
+                        let sorterFn = (a, b) => {
+                            if (a[columndataIndex] && b[columndataIndex]) {
+                                return a[columndataIndex].localeCompare(b[columndataIndex], undefined, { numeric: true, sensitivity: 'base' })
+                            } else {
+                                return false
+                            }
+                        }
+                        columnDef['sorter'] = sorterFn
                     }
-                    columnDef['sorter'] = sorterFn
                 }
 
-            }
-            let firstCol = {
-                "title": "请选择一个选项X",
-                "dataIndex": "Q1",
-                "valueType": "radio",
-                "initialValue": "1",
-                "fieldProps": {
-                    "options": [
-                        {
-                            "label": "选项1",
-                            "value": "1"
-                        },
-                        {
-                            "label": "选项2",
-                            "value": "2"
-                        },
-                        {
-                            "label": "选项3",
-                            "value": "3"
-                        },
-                        {
-                            "label": "选项4",
-                            "value": "4"
-                        }
-                    ]
-                },
-                //@ts-ignore
-                sorter: (a, b) => a["Q1"] > b["Q1"],
-                "filters": [
-                    {
-                        "text": "选项1",
-                        "value": "1"
-                    },
-                    {
-                        "text": "选项2",
-                        "value": "2"
-                    },
-                    {
-                        "text": "选项3",
-                        "value": "3"
-                    },
-                    {
-                        "text": "选项4",
-                        "value": "4"
-                    }
-                ],
-                //@ts-ignore
-                onFilter: (value, record) => record['Q1'] == value
             }
             //@ts-ignore
             // surveyjsJson[0] = firstCol
             setColumnHeaders(surveyjsJson as unknown as ProColumns<DataSourceType>[])
         }
         fetchSurveyJson(sid)
-    }, [sid]);
-
-    useEffect(() => {
-        async function fetchAllRows(surveyName: string) {
-            //let data: DataSourceType[];
-            const { data, error } = await pgrest_survey_client
-                .from(`v_${surveyName}_answer_json`)
-            //@ts-ignore
-            setDataSource(data?.map((x) => ({ id: x.rid, ...x.json })) as DataSourceType[]);
-        }
-        fetchAllRows(sid)
     }, [sid]);
 
     const columns: ProColumns<DataSourceType>[] = [
@@ -188,11 +126,18 @@ export default function Survey() {
                     />,
                 ]}
                 columns={columns}
-                request={async () => ({
-                    data: defaultData,
-                    total: 3,
-                    success: true,
-                })}
+                request={async (params, sort, filter) => {
+                    console.log(params, sort, filter)
+                    // TODO: use this filter to do server side data filter
+                    const { data, error } = await pgrest_survey_client
+                        .from(`v_${sid}_answer_json`)
+                    return {
+                        data: data?.map((x) => ({ id: x.rid, ...x.json })),
+                        success: true,
+                        total: data?.length
+                    }
+                }
+                }
                 value={dataSource}
                 onChange={setDataSource}
                 editable={{
@@ -205,7 +150,7 @@ export default function Survey() {
                         // new record , insert
                         // udpate
                         await saveRecord(sid, data);
-                        await waitTime(1000);
+                        await waitTime(500);
                     },
                     onChange: setEditableRowKeys,
                 }}
