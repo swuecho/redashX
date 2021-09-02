@@ -21,7 +21,6 @@ export default function Survey() {
     //@ts-ignore
     let { sid } = useParams();
     const [editableKeys, setEditableRowKeys] = useState<React.Key[]>([]);
-    const [dataSourceInit, setDataSourceInit] = useState<DataSourceType[]>([]);
     const [dataSource, setDataSource] = useState<DataSourceType[]>([]);
     const [position, setPosition] = useState<'top' | 'bottom' | 'hidden'>('bottom');
     const [columnHeaders, setColumnHeaders] = useState<ProColumns<DataSourceType>[]>([]);
@@ -32,10 +31,8 @@ export default function Survey() {
             let hostname_str = hostname()
             let surveyjsResp = await axios.get(`${hostname_str}/go/survey/${surveyName}`);
             let surveyjsJson = surveyjs2ProTable(surveyjsResp.data)
-            //let data: DataSourceType[];
             //@ts-ignore
             for (let columnDef of surveyjsJson) {
-                console.log(columnDef)
                 if (columnDef['filters']) {
                     columnDef['onFilter'] = true
                 }
@@ -45,10 +42,9 @@ export default function Survey() {
                         //@ts-ignore
                         columnDef['sorter'] = (a, b) => a[columndataIndex] > b[columndataIndex]
                     } else {
-
                         //@ts-ignore better '10'.localeCompare('2', undefined, {numeric: true, sensitivity: 'base'})
                         let sorterFn = (a, b) => {
-                            console.log(a, b)
+                            console.log("sort")
                             return a[columndataIndex].localeCompare(b[columndataIndex], undefined, { numeric: true, sensitivity: 'base' })
                         }
                         columnDef['sorter'] = sorterFn
@@ -71,17 +67,11 @@ export default function Survey() {
             const { data, error } = await pgrest_survey_client
                 .from(`v_${surveyName}_answer_json`)
             //@ts-ignore
-            setDataSourceInit(data?.map((x) => ({ id: x.rid, ...x.json })) as DataSourceType[]);
+            setDataSource(data?.map((x) => ({ id: x.rid, ...x.json })) as DataSourceType[]);
         }
         fetchAllRows(sid)
-    }, [sid]);
+    });
 
-    // let setDataSource Run on each state change
-    useEffect(() => {
-        if (dataSourceInit) {
-            setDataSource(dataSourceInit)
-        }
-    })
 
     const columns: ProColumns<DataSourceType>[] = [
         ...columnHeaders,
@@ -102,7 +92,7 @@ export default function Survey() {
                     key="delete"
                     onClick={async () => {
                         await deleteRecord(sid, record.id);
-                        setDataSourceInit(dataSource.filter((item) => item.id !== record.id));
+                        setDataSource(dataSource.filter((item) => item.id !== record.id));
                     }}
                 >
                     删除
