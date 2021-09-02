@@ -22,6 +22,12 @@ export default function Survey() {
     const [position, setPosition] = useState<'top' | 'bottom' | 'hidden'>('bottom');
     const [columnHeaders, setColumnHeaders] = useState<ProColumns<DataSourceType>[]>([]);
 
+
+    useEffect(() => {
+        document.title = sid || "";
+        // TODO: get survey desc from sid
+    }, [sid]);
+
     useEffect(() => {
         async function fetchSurveyJson(surveyName: string) {
             // TODO: api to get surveyjs json
