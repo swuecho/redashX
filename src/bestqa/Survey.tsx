@@ -47,8 +47,11 @@ export default function Survey() {
 
                         //@ts-ignore better '10'.localeCompare('2', undefined, {numeric: true, sensitivity: 'base'})
                         let sorterFn = (a, b) => {
-                            console.log(a, b)
-                            return a[columndataIndex].localeCompare(b[columndataIndex], undefined, { numeric: true, sensitivity: 'base' })
+                            if (a[columndataIndex] && b[columndataIndex]) {
+                                return a[columndataIndex].localeCompare(b[columndataIndex], undefined, { numeric: true, sensitivity: 'base' })
+                            } else {
+                                return false
+                            }
                         }
                         columnDef['sorter'] = sorterFn
                     }
@@ -61,20 +64,6 @@ export default function Survey() {
         }
         fetchSurveyJson(sid)
     }, [sid]);
-
-
-    //
-    useEffect(() => {
-        async function fetchAllRows(surveyName: string) {
-            //let data: DataSourceType[];
-            const { data, error } = await pgrest_survey_client
-                .from(`v_${surveyName}_answer_json`)
-            //@ts-ignore
-            setDataSource(data?.map((x) => ({ id: x.rid, ...x.json })) as DataSourceType[]);
-        }
-        fetchAllRows(sid)
-    }, [sid]);
-
 
     const columns: ProColumns<DataSourceType>[] = [
         ...columnHeaders,
@@ -141,11 +130,18 @@ export default function Survey() {
                     />,
                 ]}
                 columns={columns}
-                request={async () => ({
-                    data: defaultData,
-                    total: 3,
-                    success: true,
-                })}
+                request={async (params, sort, filter) => {
+                    console.log(params, sort, filter)
+                    // TODO: use this filter to do server side data filter
+                    const { data, error } = await pgrest_survey_client
+                        .from(`v_${sid}_answer_json`)
+                    return {
+                        data: data?.map((x) => ({ id: x.rid, ...x.json })),
+                        success: true,
+                        total: data?.length
+                    }
+                }
+                }
                 value={dataSource}
                 onChange={setDataSource}
                 editable={{
