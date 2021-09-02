@@ -13,7 +13,8 @@ let survey_json = {
                 "title": "状态", "choices":
                     [{ "value": "1", "text": "item 1", "meta": {} },
                     { "value": "2", "text": "item 2", "meta": {} },
-                    { "value": "3", "text": "item 3", "meta": {} }], "name": "Q1", "type": "dropdown"
+                    { "value": "3", "text": "item 3", "meta": {} }],
+                "name": "Q1", "type": "dropdown", "defaultValue": "1",
             }]
     }]
 }
@@ -24,19 +25,38 @@ let expected_json = {
     "title": "状态",
     "dataIndex": "Q1",
     "valueType": "select",
+    "initialValue": "1",
+    "filters": [
+        {
+            "meta": {},
+            "text": "item 1",
+            "value": "1",
+        },
+        {
+            "meta": {},
+            "text": "item 2",
+            "value": "2",
+        },
+        {
+            "meta": {},
+            "text": "item 3",
+            "value": "3",
+        },
+    ],
+    "sorter": true,
     "fieldProps": {
         "options": [
             {
                 "label": "item 1",
-                "value": "1"
+                "value": "1",
             },
             {
                 "label": "item 2",
-                "value": "2"
+                "value": "2",
             },
             {
                 "label": "item 3",
-                "value": "3"
+                "value": "3",
             }
         ]
     }
