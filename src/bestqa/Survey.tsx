@@ -34,7 +34,6 @@ export default function Survey() {
             //let data: DataSourceType[];
             //@ts-ignore
             for (let columnDef of surveyjsJson) {
-                console.log(columnDef)
                 if (columnDef['filters']) {
                     columnDef['onFilter'] = true
                 }
