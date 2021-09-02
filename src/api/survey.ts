@@ -22,7 +22,7 @@ export async function saveRecord(surveyName: string, data: DataSourceType) {
         'Content-Type': 'application/json',
     }
     headers[ridName] = data['id'] as string;
-    let result = await axios.post(`${hostname()}/sr/${surveyName}`, data, {
+    let result = await axios.post(`${hostname()}/go/st/${surveyName}`, data, {
         headers,
         withCredentials: true
     })
