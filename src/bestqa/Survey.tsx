@@ -12,11 +12,23 @@ import { pgrest_survey_client } from "../lib/pgrest";
 import { deleteRecord, saveRecord } from '../api/survey';
 import { waitTime } from "../lib/util"
 import type { DataSourceType } from "../types"
+import { Alert } from 'antd';
+
+
+function ErrorMsg({ msg }: { msg: string }) {
+    if (msg) {
+        return <div>
+            <Alert message={msg} type="error" />
+        </div>
+    }
+    return null
+}
 
 
 export default function Survey() {
     //@ts-ignore
     let { sid } = useParams();
+    const [errorMsg, setErrorMsg] = useState<string>("");
     const [editableKeys, setEditableRowKeys] = useState<React.Key[]>([]);
     const [dataSource, setDataSource] = useState<DataSourceType[]>([]);
     const [position, setPosition] = useState<'top' | 'bottom' | 'hidden'>('bottom');
@@ -97,6 +109,7 @@ export default function Survey() {
 
     return (
         <>
+            <ErrorMsg msg={errorMsg}></ErrorMsg>
             <EditableProTable<DataSourceType>
                 rowKey="id"
                 headerTitle={sid}
@@ -139,7 +152,9 @@ export default function Survey() {
                         .from(`v_${sid}_answer_json`)
 
                     if (error) {
-                        console.log(data)
+                        console.log(error)
+                        //@ts-ignore
+                        setErrorMsg(error?.message)
                         return {
                             data: [],
                             success: false
@@ -152,6 +167,10 @@ export default function Survey() {
                     }
                 }
                 }
+                // TODO
+                onRequestError={(error) => {
+                    console.log(error)
+                }}
                 value={dataSource}
                 onChange={setDataSource}
                 editable={{
