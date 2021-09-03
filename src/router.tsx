@@ -24,7 +24,7 @@ const route =
                 },
                 {
                     path: '/admin/sub-page2',
-                    name: '二级页面',
+                    name: '二级页面x',
                     icon: <CrownOutlined />,
                 },
                 {
