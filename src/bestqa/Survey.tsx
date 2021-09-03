@@ -137,6 +137,14 @@ export default function Survey() {
                     // TODO: use this filter to do server side data filter
                     const { data, error } = await pgrest_survey_client
                         .from(`v_${sid}_answer_json`)
+
+                    if (error) {
+                        console.log(data)
+                        return {
+                            data: [],
+                            success: false
+                        }
+                    }
                     return {
                         data: data?.map((x) => ({ id: x.rid, ...x.json })),
                         success: true,
