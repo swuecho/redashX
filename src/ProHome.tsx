@@ -25,7 +25,8 @@ function ProHome() {
             route={route}
             {...settings}
             title={"BestQA"}
-            primaryColor = "#1890ff"
+            primaryColor="#1890ff"
+            contentWidth='Fluid'
             navTheme="light"
             menuHeaderRender={
                 (props) => {
@@ -33,29 +34,29 @@ function ProHome() {
                 }
             }
             /* set path
-            onPageChange= {
-                const { location } = history;
-                // 如果没有登录，重定向到 login
-                history.push(loginPath);
+        onPageChange= {
+                const {location} = history;
+        // 如果没有登录，重定向到 login
+        history.push(loginPath);
             },
-            menuFooterRender={(props) => {
-                return (
-                    <a
-                        style={{
-                            lineHeight: '48rpx',
-                            display: 'flex',
-                            height: 48,
-                            color: 'rgba(255, 255, 255, 0.65)',
-                            alignItems: 'center',
-                        }}
-                        href="https://preview.pro.ant.design/dashboard/analysis"
-                        target="_blank"
-                        rel="noreferrer"
-                    >
-                    </a>
-                );
-            }}
-            */
+        menuFooterRender={(props) => {
+            return (
+                <a
+                    style={{
+                        lineHeight: '48rpx',
+                        display: 'flex',
+                        height: 48,
+                        color: 'rgba(255, 255, 255, 0.65)',
+                        alignItems: 'center',
+                    }}
+                    href="https://preview.pro.ant.design/dashboard/analysis"
+                    target="_blank"
+                    rel="noreferrer"
+                >
+                </a>
+            );
+        }}
+        */
             onMenuHeaderClick={(e) => console.log(e)}
             menuItemRender={(item, dom) => (
                 <a
@@ -75,7 +76,7 @@ function ProHome() {
         >
             <PageLoader pageName={pathname} />
         </ProLayout>
-    </div>
+    </div >
 
 }
 
