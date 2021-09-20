@@ -5,9 +5,9 @@ import StarRating from "./../../components/learn/starRating.js";
 
 function CbWatch() {
     return (
-        <div>
-            <StarRating stars={5} />
+        <div className="bg-white">
             <div className="text-center">
+                <StarRating stars={5} />
                 <CbSummary />
             </div>
             <RedashPlot queryId={53} plotId={76}></RedashPlot>
