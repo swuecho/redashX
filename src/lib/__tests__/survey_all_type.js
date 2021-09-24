@@ -3,7 +3,8 @@ import { surveyjsQuestion2ProTable } from '../survey'
 
 let surveyjs_json = {
     "pages": [{
-        "name": "page1", "elements": [{
+        "name": "page1", "elements": [
+        {
             "title": "请选择一个选项", "choices":
                 [{ "value": "1", "text": "选项1", "meta": {} }, { "value": "2", "text": "选项2", "meta": {} }, { "value": "3", "text": "选项3", "meta": {} }, { "value": "4", "text": "选项4", "meta": {} }], "name": "Q1", "type": "radiogroup"
         },
@@ -12,7 +13,9 @@ let surveyjs_json = {
         { "title": "问题描述", "name": "Q4", "type": "comment", "inputType": "text" },
         { "title": "问题描述", "rateMin": 1, "rateMax": 5, "minRateDescription": "", "maxRateDescription": "", "choices": [{ "value": 1, "text": "", "meta": {} }, { "value": 2, "text": "", "meta": {} }, { "value": 3, "text": "", "meta": {} }, { "value": 4, "text": "", "meta": {} }, { "value": 5, "text": "", "meta": {} }], "name": "Q5", "type": "rating" },
         { "title": "问题描述", "choices": [{ "value": "1", "text": "选项1", "meta": {} }, { "value": "2", "text": "选项2", "meta": {} }, { "value": "3", "text": "选项3", "meta": {} }], "name": "Q6", "type": "dropdown" },
-        { "title": "是否同意", "choices": [{ "value": "0", "text": "false", "meta": {} }, { "value": "1", "text": "true", "meta": {} }], "name": "Q7", "type": "boolean" }]
+        { "title": "是否同意", "choices": [{ "value": "0", "text": "false", "meta": {} }, { "value": "1", "text": "true", "meta": {} }], "name": "Q7", "type": "boolean" },
+  
+        ]
     }]
 }
 let elements = surveyjs_json['pages'][0]['elements']
@@ -67,28 +70,30 @@ let expected_json_all = [{
 },
 { "dataIndex": "Q3", "title": "问题描述", "valueType": "text", "copyable": true },
 { "dataIndex": "Q4", "title": "问题描述", "valueType": "textarea", "copyable": true },
-{ "dataIndex": "Q5", "title": "问题描述", "valueType": "rate", "filters": [
-    {
-        "text": "1星",
-        "value": 1
-    },
-    {
-        "text": "2星",
-        "value": 2
-    },
-    {
-        "text": "3星",
-        "value": 3
-    },
-    {
-        "text": "4星",
-        "value": 4
-    },
-    {
-        "text": "5星",
-        "value": 5
-    }
-] },
+{
+    "dataIndex": "Q5", "title": "问题描述", "valueType": "rate", "filters": [
+        {
+            "text": "1星",
+            "value": 1
+        },
+        {
+            "text": "2星",
+            "value": 2
+        },
+        {
+            "text": "3星",
+            "value": 3
+        },
+        {
+            "text": "4星",
+            "value": 4
+        },
+        {
+            "text": "5星",
+            "value": 5
+        }
+    ]
+},
 {
     "dataIndex": "Q6", "filters": [
         {
