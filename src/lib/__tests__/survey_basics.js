@@ -9,6 +9,7 @@ const expected_json_all = [
     {
         "title": "请选择一个选项",
         "dataIndex": "Q1",
+        "key": "Q1",
         "valueType": "radio",
         "initialValue": "1",
         "fieldProps": {
@@ -33,22 +34,18 @@ const expected_json_all = [
         },
         "filters": [
             {
-                "meta": {},
                 "text": "选项1",
                 "value": "1"
             },
             {
-                "meta": {},
                 "text": "选项2",
                 "value": "2"
             },
             {
-                "meta": {},
                 "text": "选项3",
                 "value": "3"
             },
             {
-                "meta": {},
                 "text": "选项4",
                 "value": "4"
             }
@@ -58,6 +55,7 @@ const expected_json_all = [
     {
         "title": "多选问题示范",
         "dataIndex": "Q2",
+        "key": "Q2",
         "valueType": "checkbox",
         "fieldProps": {
             "options": [
@@ -85,42 +83,41 @@ const expected_json_all = [
         },
         "filters": [
             {
-                "meta": {},
                 "text": "A",
                 "value": "1"
             },
             {
-                "meta": {},
                 "text": "B",
                 "value": "2"
             },
             {
-                "meta": {},
+
                 "text": "C",
                 "value": "3"
             },
             {
-                "meta": {},
+
                 "text": "D",
                 "value": "4"
             },
             {
-                "meta": {},
+
                 "text": "E",
                 "value": "5"
             }
         ],
-        "sorter": true
     },
     {
         "title": "简答问题示范",
         "dataIndex": "Q3",
+        "key": "Q3",
         "valueType": "text",
         "copyable": true
     },
     {
         "title": "问答问题示范",
         "dataIndex": "Q4",
+        "key": "Q4",
         "valueType": "textarea",
         "copyable": true
     },
@@ -154,31 +151,32 @@ const expected_json_all = [
         },
         "filters": [
             {
-                "meta": {},
+
                 "text": "A",
                 "value": "1"
             },
             {
-                "meta": {},
+
                 "text": "B",
                 "value": "2"
             },
             {
-                "meta": {},
+
                 "text": "C",
                 "value": "3"
             },
             {
-                "meta": {},
+
                 "text": "D",
                 "value": "4"
             },
             {
-                "meta": {},
+
                 "text": "E",
                 "value": "5"
             }
         ],
+        "key": "Q5",
         "sorter": true
     },
     {
@@ -199,21 +197,23 @@ const expected_json_all = [
         },
         "filters": [
             {
-                "meta": {},
+
                 "text": "false",
                 "value": "0"
             },
             {
-                "meta": {},
+
                 "text": "true",
                 "value": "1"
             }
         ],
+        "key": "Q6",
         "sorter": true
     },
     {
         "title": "请评价我们的服务",
         "dataIndex": "Q7",
+        "key": "Q7",
         "valueType": "rate",
         "filters": [
             {

@@ -26,6 +26,7 @@ export function surveyjsQuestion2ProTable(surveyjsQuestion: JSON): JSON {
             dataIndex: "name",
             key: "name",
             valueType: "type",
+            inputType: "inputType",
             initialValue: "defaultValue",
             fieldProps: { options: "choices" },
             filters: "choices"
@@ -47,7 +48,6 @@ export function surveyjsQuestion2ProTable(surveyjsQuestion: JSON): JSON {
             if (item['valueType'] === 'rate') {
                 item['filters'] = [1, 2, 3, 4, 5].map(num => ({ text: `${num}星`, value: num }))
             }
-
             if (textType.has(item['valueType'])) {
                 delete item['fieldProps']
             } else {
@@ -57,6 +57,20 @@ export function surveyjsQuestion2ProTable(surveyjsQuestion: JSON): JSON {
             }
             if (item['valueType'] === 'textarea' || item['valueType'] === 'text') {
                 item['copyable'] = true
+            }
+
+            // inputType override valueType
+            if (item['valueType'] == 'text' && item['inputType']) {
+                item['valueType'] = item['inputType']
+                delete item['inputType']
+            }
+            // textarea inputType is redundent
+            if (item['valueType'] == 'textarea' && item['inputType']) {
+                delete item['inputType']
+            }
+
+            if (!item['filters']) {
+                delete item['filters']
             }
             return item;
         }
