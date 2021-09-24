@@ -9,4 +9,4 @@ build:
 push:
     docker tag  {{local_registry}}/react_front:{{version}} {{aliyun_registry_bestqa}}/react_front:{{version}}
     docker push {{aliyun_registry_bestqa}}/react_front:{{version}}
-    curl -vv http://119.3.68.206:9000/hooks/bestqa_update
+    curl -vv http://119.3.68.206:9000/hooks/bestqa_update?token=1235
