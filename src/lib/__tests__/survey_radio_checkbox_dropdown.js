@@ -24,21 +24,19 @@ let input_json = survey_json['pages'][0]["elements"][0]
 let expected_json = {
     "title": "状态",
     "dataIndex": "Q1",
+    "key": "Q1",
     "valueType": "select",
     "initialValue": "1",
     "filters": [
         {
-            "meta": {},
             "text": "item 1",
             "value": "1",
         },
         {
-            "meta": {},
             "text": "item 2",
             "value": "2",
         },
         {
-            "meta": {},
             "text": "item 3",
             "value": "3",
         },

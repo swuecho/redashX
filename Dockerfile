@@ -10,9 +10,9 @@ COPY yarn.lock  ./
 RUN yarn install
 
 COPY . .
-# where the ENV is used?
-ENV SR_ADMIN_PRODUCTION true 
 
+# run test
+RUN yarn test --watchAll=false
 RUN yarn build
 
 # production stage
