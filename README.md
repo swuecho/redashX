@@ -19,5 +19,3 @@ use Redash API and Redash/Vis in MDX to write report (dashboard).
 
 
 related: https://www.evidence.dev/
-
-test
