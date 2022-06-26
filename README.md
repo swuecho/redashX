@@ -4,13 +4,11 @@ Redash Dashboard with mdx support
 
 use Redash API and Redash/Vis in MDX to write report (dashboard).  
 
-
 ## fetch data
 
 1. write your query in Redash, write down the query id.
 2. use the query id to fetch data. `useRedashData(queryId)`
 3. use the data in your custom React Component.
-
 
 ## plot data
 
@@ -21,10 +19,10 @@ use Redash API and Redash/Vis in MDX to write report (dashboard).
 
 the same with plot, but <code> RedashTable </code> has only on parameter <code> queryId </code>.
 
-```
+```js
 <RedashTable queryId={41}></RedashTable>
 ```
 
 ## disaply data as table
 
-related: https://www.evidence.dev/
+related: <https://www.evidence.dev/>
