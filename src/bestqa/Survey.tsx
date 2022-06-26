@@ -54,7 +54,7 @@ export default function Survey() {
                 }
                 if (columnDef['sorter']) {
                     let columndataIndex = columnDef['dataIndex']
-                    if (columnDef['valueType'] == 'switch') {
+                    if (columnDef['valueType'] === 'switch') {
                         //@ts-ignore
                         columnDef['sorter'] = (a, b) => a[columndataIndex] > b[columndataIndex]
                     } else {
