@@ -17,6 +17,13 @@ use Redash API and Redash/Vis in MDX to write report (dashboard).
 1. create plot in Redash, write down the query id and plot id.  `http://192.168.0.135/queries/53/source#76 -> (53, 76)`
 2. use the plot in your MDX. `<RedashPlot queryId={53} plotId={76}></RedashPlot>`
 
+## display data
+
+the same with plot, but <code> RedashTable </code> has only on parameter <code> queryId </code>.
+
+```
+<RedashTable queryId={41}></RedashTable>
+```
 
 ## disaply data as table
 
