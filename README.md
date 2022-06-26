@@ -18,4 +18,6 @@ use Redash API and Redash/Vis in MDX to write report (dashboard).
 2. use the plot in your MDX. `<RedashPlot queryId={53} plotId={76}></RedashPlot>`
 
 
+## disaply data as table
+
 related: https://www.evidence.dev/
