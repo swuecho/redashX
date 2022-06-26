@@ -51,7 +51,7 @@ const route =
                     icon: <CrownOutlined />,
                 },
                 {
-                    path: 'sub-page3',
+                    path: 'RedashTableDemo',
                     name: '三级页面',
                     icon: <CrownOutlined />,
                 },
