@@ -52,7 +52,7 @@ const route =
                 },
                 {
                     path: 'RedashTableDemo',
-                    name: '三级页面',
+                    name: '最近登录',
                     icon: <CrownOutlined />,
                 },
             ],
