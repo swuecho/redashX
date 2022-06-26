@@ -46,8 +46,8 @@ const route =
                     icon: <CrownOutlined />,
                 },
                 {
-                    path: 'sub-page2',
-                    name: '二级页面',
+                    path: 'SurveyPerformance',
+                    name: '问卷性能',
                     icon: <CrownOutlined />,
                 },
                 {
