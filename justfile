@@ -2,7 +2,7 @@
 aliyun_registry_bestqa:="registry.cn-shanghai.aliyuncs.com/bestqa"
 local_registry:="192.168.0.100:5555"
 version:="latest"
-image_name:="readashX"
+image_name:="readash_x"
 
 build: 
     docker build -t  {{local_registry}}/{{image_name}}:{{version}} . 
