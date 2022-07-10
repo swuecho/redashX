@@ -16,7 +16,7 @@ use Redash API and Redash/Vis in MDX to write report (dashboard).
 2. use the plot in your MDX.
 
 ```js
-`<RedashPlot queryId={53} plotId={76}></RedashPlot>
+<RedashPlot queryId={53} plotId={76}></RedashPlot>
 ```
 
 ## display data
